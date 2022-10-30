@@ -1,0 +1,50 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Tranquility.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:Microsoft.UI.Xaml.Controls"
+    x:Class="Tranquility.Views.InventorySend"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="#FF191919" RequestedTheme="Dark">
+<Canvas Background="Black" Margin="0,0,0,496">
+            <Button x:Name="OverviewNavButton" Height="37" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Background="#33565656" Click="OverviewNavButton_Click" Canvas.Top="4" Canvas.Left="10">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF246;"/>
+            </Button>
+            <Button x:Name="ReceiveNavButton" Height="37" Canvas.Left="55" Background="#33565656" Click="ReceiveNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEA58;"/>
+            </Button>
+
+            <Button x:Name="SendNavButton" Height="37" Canvas.Left="100" Background="#33565656" Click="SendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE724;"/>
+            </Button>
+            <Button x:Name="InventorySendNavButton" Height="37" Canvas.Left="145" Background="#33565656" Click="InventorySendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE725;"/>
+            </Button>
+            <Button x:Name="Settings" Height="37" Canvas.Left="190" Background="#33565656" Click="Settings_Click" Canvas.Top="4" VerticalAlignment="Top">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF8B0;"/>
+            </Button>
+        </Canvas>
+        <Border x:Name="pageborder" BorderBrush="#FF00D6FF" BorderThickness="1" Margin="24,60,28,16" Background="#FF0E0E0E">
+            <Canvas>
+                <ComboBox x:Name="InventorySelector" Width="279" PlaceholderText="Select metadata token to send" SelectionChanged="TokenWalletSelector_SelectionChanged" ToolTipService.ToolTip="If you have token accounts they will displayed here" Canvas.Left="147" Canvas.Top="277" Visibility="Visible" HorizontalAlignment="Center"/>
+                <TextBox x:Name="SolanaAddressSendField" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="612" Height="32" PlaceholderText="Solana address to send assets to" ToolTipService.ToolTip="This is the address you wish to send SOL or tokens to" Canvas.Left="147" Canvas.Top="140" SelectionHighlightColor="#FF00D6FF"/>
+                <TextBox x:Name="SendAmountField" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279" Height="33" InputScope="Number" PlaceholderText="Amount to send" ToolTipService.ToolTip="This is the amount to send in the transfer" Canvas.Left="147" Canvas.Top="203" SelectionHighlightColor="#FF00D6FF"/>
+                <Button x:Name="TransferButton" Content="Transfer" VerticalAlignment="Top" Width="143" Height="40" Click="Transfer_Click" BorderBrush="#FF00D6FF" BorderThickness="1,1,1,1" Canvas.Left="753" Canvas.Top="412"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="21" FontWeight="Bold" Canvas.Left="328" Canvas.Top="49"><Run Text="Transfer Inventory Assets"/><LineBreak/><Run/></TextBlock>
+                <Image x:Name="CollectiblePreview" HorizontalAlignment="Left" Height="215" VerticalAlignment="Top" Width="215" Canvas.Left="474" Canvas.Top="237"/>
+
+
+
+
+            </Canvas>
+
+        </Border>
+        
+
+
+    </Grid>
+</Page>
