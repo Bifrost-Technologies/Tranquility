@@ -33,37 +33,51 @@ namespace Tranquility.Views
         }
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            await Wallets.SolanaWallet.RetrieveActiveAccountData();
+            try
+            {
+                await Wallets.SolanaWallet.RetrieveActiveAccountData();
 
-           foreach(var item in Core.Runtime.Inventory)
-           {
-                if(item.MetadataVersion == 1)
-                    InventorySelector.Items.Add(item.metadataV1.name);
-                if(item.MetadataVersion == 3)
-                    InventorySelector.Items.Add(item.metadataV3.name);
-           }
+                foreach (var item in Core.Runtime.Inventory)
+                {
+                    if (item.MetadataVersion == 1)
+                        InventorySelector.Items.Add(item.metadataV1.name);
+                    if (item.MetadataVersion == 3)
+                        InventorySelector.Items.Add(item.metadataV3.name);
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
 
         }
         private void Transfer_Click(object sender, RoutedEventArgs e)
         {
-            decimal amount = 0;
             try
             {
-                amount = Convert.ToDecimal(SendAmountField.Text);
-            }catch(Exception ex)
-            {
-                amount = 0;
-            }
+                decimal amount = 0;
+                try
+                {
+                    amount = Convert.ToDecimal(SendAmountField.Text);
+                }
+                catch (Exception ex)
+                {
+                    amount = 0;
+                }
 
-            if(SolanaAddressSendField.Text.Count() == 32)
-            {
-                MetadataAccount currentAcc = null;
-                currentAcc = Core.Runtime.Inventory.Find(x => x.metadataV3.name == InventorySelector.SelectedValue.ToString() & x.MetadataVersion == 3);
-                if (currentAcc == null)
-                    currentAcc = Core.Runtime.Inventory.Find(x => x.metadataV1.name == InventorySelector.SelectedValue.ToString() & x.MetadataVersion == 1);
-                Wallets.SolanaWallet.SendTokens(SolanaAddressSendField.Text, currentAcc.mint, amount);
+                if (SolanaAddressSendField.Text.Count() == 32)
+                {
+                    MetadataAccount currentAcc = null;
+                    currentAcc = Core.Runtime.Inventory.Find(x => x.metadataV3.name == InventorySelector.SelectedValue.ToString() & x.MetadataVersion == 3);
+                    if (currentAcc == null)
+                        currentAcc = Core.Runtime.Inventory.Find(x => x.metadataV1.name == InventorySelector.SelectedValue.ToString() & x.MetadataVersion == 1);
+                    Wallets.SolanaWallet.SendTokens(SolanaAddressSendField.Text, currentAcc.mint, amount);
+                }
             }
-          
+            catch (Exception ex)
+            {
+
+            }
         }
 
      
@@ -74,14 +88,20 @@ namespace Tranquility.Views
 
         private void TokenWalletSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
+                MetadataAccount asset_image = null;
+                asset_image = Core.Runtime.Inventory.Find(x => x.metadataV3.name == InventorySelector.SelectedValue.ToString() & x.MetadataVersion == 3);
+                if (asset_image == null)
+                    asset_image = Core.Runtime.Inventory.Find(x => x.metadataV1.name == InventorySelector.SelectedValue.ToString() & x.MetadataVersion == 1);
 
-            MetadataAccount asset_image = null;
-            asset_image = Core.Runtime.Inventory.Find(x => x.metadataV3.name == InventorySelector.SelectedValue.ToString() & x.MetadataVersion == 3);
-            if(asset_image == null)
-                asset_image = Core.Runtime.Inventory.Find(x => x.metadataV1.name == InventorySelector.SelectedValue.ToString() & x.MetadataVersion == 1);
+                BitmapImage digitalAsset = new BitmapImage(new Uri(asset_image.offchainData.image));
+                CollectiblePreview.Source = digitalAsset;
+            }
+            catch (Exception ex)
+            {
 
-            BitmapImage digitalAsset = new BitmapImage(new Uri(asset_image.offchainData.image));
-            CollectiblePreview.Source = digitalAsset;
+            }
         }
 
         private void ReceiveNavButton_Click(object sender, RoutedEventArgs e)

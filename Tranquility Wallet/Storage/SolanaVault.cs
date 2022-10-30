@@ -120,45 +120,73 @@ namespace Tranquility.Storage
         }
         public async void SaveVaultKey()
         {
-            var folder = ApplicationData.Current.LocalFolder;
-            StorageFile file = null;
-            file = await folder.CreateFileAsync("vault.key", CreationCollisionOption.ReplaceExisting);
-            
-            await FileIO.WriteTextAsync(file, Convert.ToBase64String(HashedProtectedKey.ToArray()));
+            try
+            {
+                var folder = ApplicationData.Current.LocalFolder;
+                StorageFile file = null;
+                file = await folder.CreateFileAsync("vault.key", CreationCollisionOption.ReplaceExisting);
+
+                await FileIO.WriteTextAsync(file, Convert.ToBase64String(HashedProtectedKey.ToArray()));
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
         public async void SaveWalletStorage()
         {
-            var folder = ApplicationData.Current.LocalFolder;
-            StorageFile file = null;
-            file = await folder.CreateFileAsync("solana.vault", CreationCollisionOption.ReplaceExisting);
+            try
+            {
+                var folder = ApplicationData.Current.LocalFolder;
+                StorageFile file = null;
+                file = await folder.CreateFileAsync("solana.vault", CreationCollisionOption.ReplaceExisting);
 
-            await FileIO.WriteTextAsync(file, Convert.ToBase64String(Wallet.ToArray()));
+                await FileIO.WriteTextAsync(file, Convert.ToBase64String(Wallet.ToArray()));
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
         public async void SaveAccountStorage()
         {
-            var folder = ApplicationData.Current.LocalFolder;
-            StorageFile file = null;
-          
-            var _AV = new List<string>();
-            foreach(var acc in AccountStorage)
+            try
             {
-                _AV.Add(Convert.ToBase64String(acc.ToArray()));
+                var folder = ApplicationData.Current.LocalFolder;
+                StorageFile file = null;
+
+                var _AV = new List<string>();
+                foreach (var acc in AccountStorage)
+                {
+                    _AV.Add(Convert.ToBase64String(acc.ToArray()));
+                }
+                file = await folder.CreateFileAsync("solano.vault", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteLinesAsync(file, _AV);
             }
-            file = await folder.CreateFileAsync("solano.vault", CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteLinesAsync(file, _AV);
+            catch(Exception ex)
+            {
+
+            }
         }
         public async void SaveWalletIndex()
         {
-            var folder = ApplicationData.Current.LocalFolder;
-            StorageFile file = null;
-
-            var _WI = new List<string>();
-            foreach (var index in WalletIndexChart)
+            try
             {
-                _WI.Add(index.ToString());
+                var folder = ApplicationData.Current.LocalFolder;
+                StorageFile file = null;
+
+                var _WI = new List<string>();
+                foreach (var index in WalletIndexChart)
+                {
+                    _WI.Add(index.ToString());
+                }
+                file = await folder.CreateFileAsync("wallet.index", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteLinesAsync(file, _WI);
             }
-            file = await folder.CreateFileAsync("wallet.index", CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteLinesAsync(file, _WI);
+            catch(Exception ex)
+            {
+
+            }
         }
 
     }

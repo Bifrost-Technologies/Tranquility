@@ -38,7 +38,7 @@ namespace Tranquility.Views
         private void App_SizeChanged(object sender, SizeChangedEventArgs e)
         {
 
-            ApplicationView.GetForCurrentView().TryResizeView(new Size(970, 540));
+           // ApplicationView.GetForCurrentView().TryResizeView(new Size(970, 540));
         }
 
         private async void Auth_click(object sender, RoutedEventArgs e)

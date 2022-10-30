@@ -33,75 +33,98 @@ namespace Tranquility.Views
         }
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            await Wallets.SolanaWallet.RetrieveActiveAccountData();
-
-            TokenWalletSelector.Items.Add("SOL");
-            foreach (var account in Core.Runtime.tokenWallet.TokenAccounts())
+            try
             {
-                if (account.QuantityDecimal != 0 & account.Symbol != "USDC" && !String.IsNullOrEmpty(account.Symbol) || account.Symbol == "USDC")
-                {
-                    TokenWalletSelector.Items.Add(account.Symbol);
-                }
+                await Wallets.SolanaWallet.RetrieveActiveAccountData();
 
+                TokenWalletSelector.Items.Add("SOL");
+                foreach (var account in Core.Runtime.tokenWallet.TokenAccounts())
+                {
+                    if (account.QuantityDecimal != 0 & account.Symbol != "USDC" && !String.IsNullOrEmpty(account.Symbol) || account.Symbol == "USDC")
+                    {
+                        TokenWalletSelector.Items.Add(account.Symbol);
+                    }
+                }
             }
-           
+            catch (Exception ex)
+            {
+                MessageBlock.Text = "Something went wrong! Check your internet connection and restart the app!";
+                MessageBlock.Visibility = Visibility.Visible;
+            }
 
         }
         private void Transfer_Click(object sender, RoutedEventArgs e)
         {
-            if(TokenWalletSelector.SelectedValue.ToString() == "SOL")
+            try
             {
-                decimal amount = 0;
-                try
-                {
-                    amount = Convert.ToDecimal(SendAmountField.Text);
-                }
-                catch (Exception ex)
-                {
-                    amount = 0;
-                }
 
-                if (SolanaAddressSendField.Text.Count() == 32)
-                {
-                    Wallets.SolanaWallet.SendSOL(SolanaAddressSendField.Text, amount);
-                    MessageBlock.Visibility = Visibility.Visible;
-                    MessageBlock.Text = "SOL has been sent!";
-                }
 
+                if (TokenWalletSelector.SelectedValue.ToString() == "SOL")
+                {
+                    decimal amount = 0;
+                    try
+                    {
+                        amount = Convert.ToDecimal(SendAmountField.Text);
+                    }
+                    catch (Exception ex)
+                    {
+                        amount = 0;
+                    }
+
+                    if (SolanaAddressSendField.Text.Count() == 32)
+                    {
+                        Wallets.SolanaWallet.SendSOL(SolanaAddressSendField.Text, amount);
+                        MessageBlock.Visibility = Visibility.Visible;
+                        MessageBlock.Text = "SOL has been sent!";
+                    }
+
+                }
+                else
+                {
+                    decimal amount = 0;
+                    try
+                    {
+                        amount = Convert.ToDecimal(SendAmountField.Text);
+                    }
+                    catch (Exception ex)
+                    {
+                        amount = 0;
+                    }
+
+                    if (SolanaAddressSendField.Text.Count() == 32)
+                    {
+                        TokenWalletAccount currentAcc = null;
+                        currentAcc = Core.Runtime.tokenWallet.TokenAccounts().WithCustomFilter(a => a.Symbol == TokenWalletSelector.SelectedValue.ToString()).ToArray()[0];
+
+                        Wallets.SolanaWallet.SendTokens(SolanaAddressSendField.Text, currentAcc.TokenMint, amount);
+                        MessageBlock.Text = "Tokens have been sent!";
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                decimal amount = 0;
-                try
-                {
-                    amount = Convert.ToDecimal(SendAmountField.Text);
-                }
-                catch (Exception ex)
-                {
-                    amount = 0;
-                }
-
-                if (SolanaAddressSendField.Text.Count() == 32)
-                {
-                    TokenWalletAccount currentAcc = null;
-                    currentAcc = Core.Runtime.tokenWallet.TokenAccounts().WithCustomFilter(a => a.Symbol == TokenWalletSelector.SelectedValue.ToString()).ToArray()[0];
-
-                    Wallets.SolanaWallet.SendTokens(SolanaAddressSendField.Text, currentAcc.TokenMint, amount);
-                    MessageBlock.Text = "Tokens have been sent!";
-                }
+                MessageBlock.Visibility = Visibility.Visible;
+                MessageBlock.Text = "Something went wrong! Restart the app and check your internet connection!";
             }
         }
 
         private void TokenWalletSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var TokenAccounts = Core.Runtime.tokenWallet.TokenAccounts();
-            if (TokenWalletSelector.SelectedItem.ToString() == "SOL")
+            try
             {
-                BalanceLabel.Text = Core.Runtime.tokenWallet.Sol.ToString();
+                var TokenAccounts = Core.Runtime.tokenWallet.TokenAccounts();
+                if (TokenWalletSelector.SelectedItem.ToString() == "SOL")
+                {
+                    BalanceLabel.Text = Core.Runtime.tokenWallet.Sol.ToString();
+                }
+                else
+                {
+                    BalanceLabel.Text = TokenAccounts.Where(x => x.Symbol == TokenWalletSelector.SelectedItem.ToString()).First().QuantityDecimal.ToString();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                BalanceLabel.Text = TokenAccounts.Where(x => x.Symbol == TokenWalletSelector.SelectedItem.ToString()).First().QuantityDecimal.ToString();
+
             }
         }
 

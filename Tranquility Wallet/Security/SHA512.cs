@@ -13,15 +13,23 @@ namespace Tranquility.Security
     {
         public static string Hash(string input)
         {
-            HashAlgorithmProvider SHA512_Provider = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha512);
-            CryptographicHash Hash = SHA512_Provider.CreateHash();
+            String strHash = String.Empty;
+            try
+            {
+                HashAlgorithmProvider SHA512_Provider = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha512);
+                CryptographicHash Hash = SHA512_Provider.CreateHash();
 
-            IBuffer buffMsg = CryptographicBuffer.ConvertStringToBinary(input, BinaryStringEncoding.Utf16BE);
-            Hash.Append(buffMsg);
-            IBuffer buffHash = Hash.GetValueAndReset();
+                IBuffer buffMsg = CryptographicBuffer.ConvertStringToBinary(input, BinaryStringEncoding.Utf16BE);
+                Hash.Append(buffMsg);
+                IBuffer buffHash = Hash.GetValueAndReset();
 
-            String strHash = CryptographicBuffer.EncodeToBase64String(buffHash);
-            return strHash;
+                strHash = CryptographicBuffer.EncodeToBase64String(buffHash);
+            }
+            catch (Exception ex)
+            {
+
+            }
+                return strHash;
         }
     }
 }

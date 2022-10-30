@@ -26,14 +26,28 @@ namespace Tranquility.Core
         public static int SelectedAccount { get; set; }
         public static void SaveRPCProvider(string value)
         {
-            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            localSettings.Values["RPC_provider"] = value;
+            try
+            {
+                ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+                localSettings.Values["RPC_provider"] = value;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         public static void LoadRPCProvider()
         {
-            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            String rpc = localSettings.Values["RPC_provider"] as string;
-            WalletRPCprovider = rpc;
+            try
+            {
+                ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+                String rpc = localSettings.Values["RPC_provider"] as string;
+                WalletRPCprovider = rpc;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
  

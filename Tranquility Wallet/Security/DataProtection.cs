@@ -21,21 +21,38 @@ namespace Tranquility.Security
 
         public static async Task<IBuffer> ProtectAsync(String data)
         {
-            DataProtectionProvider Provider = new DataProtectionProvider("LOCAL=user");
+            IBuffer buffProtected = null;
+            try
+            {
+                DataProtectionProvider Provider = new DataProtectionProvider("LOCAL=user");
 
-            IBuffer buffMsg = CryptographicBuffer.ConvertStringToBinary(data, BinaryStringEncoding.Utf8);
+                IBuffer buffMsg = CryptographicBuffer.ConvertStringToBinary(data, BinaryStringEncoding.Utf8);
 
-            IBuffer buffProtected = await Provider.ProtectAsync(buffMsg);
+                buffProtected = await Provider.ProtectAsync(buffMsg);
+            }
+            catch (Exception ex)
+            {
+
+            }
             return buffProtected;
         }
 
         public static async Task<String> UnprotectData(IBuffer buffProtected)
         {
-            DataProtectionProvider Provider = new DataProtectionProvider();
+            IBuffer buffUnprotected = null;
+            String strClearText = String.Empty;
+            try
+            {
+                DataProtectionProvider Provider = new DataProtectionProvider();
 
-            IBuffer buffUnprotected = await Provider.UnprotectAsync(buffProtected);
+                buffUnprotected = await Provider.UnprotectAsync(buffProtected);
 
-            String strClearText = CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, buffUnprotected);
+                strClearText = CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, buffUnprotected);
+            }
+            catch(Exception ex)
+            {
+
+            }
             return strClearText;
         }
     }

@@ -27,7 +27,14 @@ namespace Tranquility.Views
         public Receive()
         {
             this.InitializeComponent();
-            this.WalletAddressDisplayBlock.Text = Core.Runtime.SolanaVault.ActiveAccounts[Core.Runtime.SelectedAccount].Address;
+            try
+            {
+                this.WalletAddressDisplayBlock.Text = Core.Runtime.SolanaVault.ActiveAccounts[Core.Runtime.SelectedAccount].Address;
+            }
+            catch(Exception ex)
+            {
+
+            }
             ReceiveNavButton.BorderBrush = pageborder.BorderBrush;
             ReceiveNavButton.BorderThickness = new Thickness(1,1,1,1);
         }
@@ -44,14 +51,24 @@ namespace Tranquility.Views
 
         private async void Copybutton_Click(object sender, RoutedEventArgs e)
         {
-            DataPackage dataPackage = new DataPackage();
-            dataPackage.RequestedOperation = DataPackageOperation.Copy;
-            dataPackage.SetText(Core.Runtime.SolanaVault.ActiveAccounts[Core.Runtime.SelectedAccount].Address);
-            Clipboard.SetContent(dataPackage);
-            MessageBlock.Text = "Wallet Address Copied Successfully!";
-            MessageBlock.Visibility = Visibility.Visible;
-            await Task.Delay(5000);
-            MessageBlock.Visibility = Visibility.Collapsed;
+            try
+            {
+                DataPackage dataPackage = new DataPackage();
+                dataPackage.RequestedOperation = DataPackageOperation.Copy;
+                dataPackage.SetText(Core.Runtime.SolanaVault.ActiveAccounts[Core.Runtime.SelectedAccount].Address);
+                Clipboard.SetContent(dataPackage);
+                MessageBlock.Text = "Wallet Address Copied Successfully!";
+                MessageBlock.Visibility = Visibility.Visible;
+                await Task.Delay(5000);
+                MessageBlock.Visibility = Visibility.Collapsed;
+            }
+            catch (Exception ex)
+            {
+                MessageBlock.Text = "Could not find address or your internet connection is lost!";
+                MessageBlock.Visibility = Visibility.Visible;
+                await Task.Delay(10000);
+                MessageBlock.Visibility = Visibility.Collapsed;
+            }
 
         }
 

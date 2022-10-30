@@ -29,10 +29,14 @@ namespace Tranquility.Views
 
         private async Task InitializeAsync()
         {
-           
-            if(Core.Runtime.WalletRPCprovider != null & Core.Runtime.WalletRPCprovider != "https://falling-light-sailboat.solana-mainnet.discover.quiknode.pro/5236d424fa1fd0f1e0fda142470aea120c0d2e3f/")
-                rpcfield.Text = Core.Runtime.WalletRPCprovider;
-            
+            try
+            {
+                if (Core.Runtime.WalletRPCprovider != null & Core.Runtime.WalletRPCprovider != "https://falling-light-sailboat.solana-mainnet.discover.quiknode.pro/5236d424fa1fd0f1e0fda142470aea120c0d2e3f/")
+                    rpcfield.Text = Core.Runtime.WalletRPCprovider;
+            }catch (Exception ex)
+            {
+
+            }
             await Task.CompletedTask;
         }
 
@@ -62,20 +66,33 @@ namespace Tranquility.Views
 
         private async void unlock_seed_Click(object sender, RoutedEventArgs e)
         {
-            var hashPW = SHA512.Hash(seedphrase_passphasefield.Password);
-            var hashPWReal = await DataProtection.UnprotectData(Core.Runtime.SolanaVault.HashedProtectedKey);
-            if (hashPW == hashPWReal)
+            try
             {
-                PhraseDisplay.Text = await DataProtection.UnprotectData(Core.Runtime.SolanaVault.Wallet);
+                var hashPW = SHA512.Hash(seedphrase_passphasefield.Password);
+                var hashPWReal = await DataProtection.UnprotectData(Core.Runtime.SolanaVault.HashedProtectedKey);
+                if (hashPW == hashPWReal)
+                {
+                    PhraseDisplay.Text = await DataProtection.UnprotectData(Core.Runtime.SolanaVault.Wallet);
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
         private async void createAcc_Click(object sender, RoutedEventArgs e)
         {
-            
-            Core.Runtime.SolanaVault.WalletIndexChart.Add(Convert.ToInt32(indexSelector.Text));
-            Core.Runtime.SolanaVault.SaveWalletIndex();
-           await Wallets.SolanaWallet.GenerateActiveAccounts();
+            try
+            {
+                Core.Runtime.SolanaVault.WalletIndexChart.Add(Convert.ToInt32(indexSelector.Text));
+                Core.Runtime.SolanaVault.SaveWalletIndex();
+                await Wallets.SolanaWallet.GenerateActiveAccounts();
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
 
