@@ -33,7 +33,8 @@ namespace Tranquility.Views
             {
                 if (Core.Runtime.WalletRPCprovider != null & Core.Runtime.WalletRPCprovider != "https://falling-light-sailboat.solana-mainnet.discover.quiknode.pro/5236d424fa1fd0f1e0fda142470aea120c0d2e3f/")
                     rpcfield.Text = Core.Runtime.WalletRPCprovider;
-            }catch (Exception ex)
+            }
+            catch
             {
 
             }
@@ -75,7 +76,7 @@ namespace Tranquility.Views
                     PhraseDisplay.Text = await DataProtection.UnprotectData(Core.Runtime.SolanaVault.Wallet);
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -89,7 +90,7 @@ namespace Tranquility.Views
                 Core.Runtime.SolanaVault.SaveWalletIndex();
                 await Wallets.SolanaWallet.GenerateActiveAccounts();
             }
-            catch(Exception ex)
+            catch
             {
 
             }

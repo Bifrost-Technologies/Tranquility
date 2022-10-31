@@ -46,7 +46,7 @@ namespace Tranquility.Views
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBlock.Text = "Something went wrong! Check your internet connection and restart the app!";
                 MessageBlock.Visibility = Visibility.Visible;
@@ -66,7 +66,7 @@ namespace Tranquility.Views
                     {
                         amount = Convert.ToDecimal(SendAmountField.Text);
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         amount = 0;
                     }
@@ -86,7 +86,7 @@ namespace Tranquility.Views
                     {
                         amount = Convert.ToDecimal(SendAmountField.Text);
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         amount = 0;
                     }
@@ -101,7 +101,7 @@ namespace Tranquility.Views
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBlock.Visibility = Visibility.Visible;
                 MessageBlock.Text = "Something went wrong! Restart the app and check your internet connection!";
@@ -122,7 +122,7 @@ namespace Tranquility.Views
                     BalanceLabel.Text = TokenAccounts.Where(x => x.Symbol == TokenWalletSelector.SelectedItem.ToString()).First().QuantityDecimal.ToString();
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
             }

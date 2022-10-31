@@ -31,7 +31,7 @@ namespace Tranquility.Views
             {
                 this.WalletAddressDisplayBlock.Text = Core.Runtime.SolanaVault.ActiveAccounts[Core.Runtime.SelectedAccount].Address;
             }
-            catch(Exception ex)
+            catch
             {
 
             }
@@ -62,7 +62,7 @@ namespace Tranquility.Views
                 await Task.Delay(5000);
                 MessageBlock.Visibility = Visibility.Collapsed;
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBlock.Text = "Could not find address or your internet connection is lost!";
                 MessageBlock.Visibility = Visibility.Visible;

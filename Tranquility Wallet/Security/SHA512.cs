@@ -25,7 +25,7 @@ namespace Tranquility.Security
 
                 strHash = CryptographicBuffer.EncodeToBase64String(buffHash);
             }
-            catch (Exception ex)
+            catch
             {
 
             }

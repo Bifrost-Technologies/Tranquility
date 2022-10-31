@@ -38,7 +38,7 @@ namespace Tranquility.Wallets
                 Core.Runtime.SolanaVault.SaveVaultKey();
                 Debug.WriteLine("Wallet Created Successfully!");
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -60,7 +60,7 @@ namespace Tranquility.Wallets
                 Core.Runtime.SolanaVault.SaveWalletStorage();
                 Core.Runtime.SolanaVault.SaveVaultKey();
             }
-            catch (Exception ex)
+            catch
             {
               
             }
@@ -88,7 +88,7 @@ namespace Tranquility.Wallets
                 Build(new List<Account> { walletOwner });
                 var tx = await rpcClient.SendTransactionAsync(transferTx);
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -122,7 +122,7 @@ namespace Tranquility.Wallets
 
                 var tx = await rpcClient.SendTransactionAsync(transferTx);
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -142,7 +142,7 @@ namespace Tranquility.Wallets
                 Core.Runtime.tokenWallet = await TokenWallet.LoadAsync(RPC_client, Core.Runtime.tokenMintDatabase, new PublicKey(key: _walletaddress));
                 Core.Runtime.SolanaVault.ActiveAccounts[Core.Runtime.SelectedAccount].Balance = Core.Runtime.tokenWallet.Sol.ToString();
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -200,7 +200,7 @@ namespace Tranquility.Wallets
                 _wallet = null; ActiveAcc = null;
 
             }
-            catch (Exception ex)
+            catch
             {
 
             }

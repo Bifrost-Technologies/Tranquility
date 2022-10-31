@@ -30,7 +30,7 @@ namespace Tranquility.Security
 
                 buffProtected = await Provider.ProtectAsync(buffMsg);
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -49,7 +49,7 @@ namespace Tranquility.Security
 
                 strClearText = CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, buffUnprotected);
             }
-            catch(Exception ex)
+            catch
             {
 
             }

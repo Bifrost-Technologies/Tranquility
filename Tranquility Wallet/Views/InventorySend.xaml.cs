@@ -45,7 +45,7 @@ namespace Tranquility.Views
                         InventorySelector.Items.Add(item.metadataV3.name);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 
             }
@@ -60,7 +60,7 @@ namespace Tranquility.Views
                 {
                     amount = Convert.ToDecimal(SendAmountField.Text);
                 }
-                catch (Exception ex)
+                catch
                 {
                     amount = 0;
                 }
@@ -74,7 +74,7 @@ namespace Tranquility.Views
                     Wallets.SolanaWallet.SendTokens(SolanaAddressSendField.Text, currentAcc.mint, amount);
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -98,7 +98,7 @@ namespace Tranquility.Views
                 BitmapImage digitalAsset = new BitmapImage(new Uri(asset_image.offchainData.image));
                 CollectiblePreview.Source = digitalAsset;
             }
-            catch (Exception ex)
+            catch
             {
 
             }

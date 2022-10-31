@@ -45,7 +45,7 @@ namespace Tranquility.Storage
                 }
                    
             }
-            catch(Exception ex)
+            catch
             {
                 Core.Runtime.SuccessfullyLoaded = false;
             }
@@ -64,7 +64,7 @@ namespace Tranquility.Storage
                     Core.Runtime.SuccessfullyLoaded = true;
                 }
                    
-            }catch(Exception ex)
+            }catch
             {
                 Core.Runtime.SuccessfullyLoaded = false;
             }
@@ -88,7 +88,7 @@ namespace Tranquility.Storage
                 }
 
             }
-            catch (Exception ex)
+            catch
             {
                 Core.Runtime.SuccessfullyLoaded = false;
             }
@@ -112,7 +112,7 @@ namespace Tranquility.Storage
                 }
 
             }
-            catch (Exception ex)
+            catch
             {
                 Core.Runtime.SuccessfullyLoadedWI = false;
             }
@@ -128,7 +128,7 @@ namespace Tranquility.Storage
 
                 await FileIO.WriteTextAsync(file, Convert.ToBase64String(HashedProtectedKey.ToArray()));
             }
-            catch(Exception ex)
+            catch
             {
 
             }
@@ -143,7 +143,7 @@ namespace Tranquility.Storage
 
                 await FileIO.WriteTextAsync(file, Convert.ToBase64String(Wallet.ToArray()));
             }
-            catch(Exception ex)
+            catch
             {
 
             }
@@ -163,7 +163,7 @@ namespace Tranquility.Storage
                 file = await folder.CreateFileAsync("solano.vault", CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteLinesAsync(file, _AV);
             }
-            catch(Exception ex)
+            catch
             {
 
             }
@@ -183,7 +183,7 @@ namespace Tranquility.Storage
                 file = await folder.CreateFileAsync("wallet.index", CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteLinesAsync(file, _WI);
             }
-            catch(Exception ex)
+            catch
             {
 
             }

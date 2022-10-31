@@ -65,7 +65,7 @@ namespace Tranquility.Views
                     ActiveAccountsSelector.Items.Add(activeAcc.Address);
                 }
                 ActiveAccountsSelector.PlaceholderText = ActiveAccountsSelector.Items[Core.Runtime.SelectedAccount].ToString();
-            }catch (Exception ex)
+            }catch
             {
                 WalletBalance.Text = "Something went wrong.. Check your internet connection!";
             }
@@ -128,7 +128,7 @@ namespace Tranquility.Views
                             {
                                 metadataAccount = await MetadataAccount.GetAccount(rpcClient, AssociatedTokenAccountProgram.DeriveAssociatedTokenAccount(new PublicKey(Core.Runtime.SolanaVault.ActiveAccounts[Core.Runtime.SelectedAccount].Address), new PublicKey(account.TokenMint)), 3);
                             }
-                            catch (Exception ex)
+                            catch
                             {
 
                             }
@@ -177,7 +177,7 @@ namespace Tranquility.Views
                                 {
                                     metadataAccount = await MetadataAccount.GetAccount(rpcClient, AssociatedTokenAccountProgram.DeriveAssociatedTokenAccount(new PublicKey(Core.Runtime.SolanaVault.ActiveAccounts[Core.Runtime.SelectedAccount].Address), new PublicKey(account.TokenMint)), 1);
                                 }
-                                catch (Exception ex)
+                                catch
                                 {
 
                                 }
@@ -252,7 +252,7 @@ namespace Tranquility.Views
                 TokenAccountList.UpdateLayout();
                 WalletBalance.Text = wallet_worth.ToString("C", CultureInfo.CreateSpecificCulture("en-US"));
             }
-            catch (Exception ex)
+            catch
             {
                 WalletBalance.Text = "Something went wrong! Restart the app & check your internet connection";
             }
@@ -302,7 +302,7 @@ namespace Tranquility.Views
                 Core.Runtime.SelectedAccount = Core.Runtime.SolanaVault.ActiveAccounts.FindIndex(e => e.Address == ActiveAccountsSelector.SelectedValue.ToString());
                 LoadWalletData();
             }
-            catch (Exception ex)
+            catch
             {
                 WalletBalance.Text = "Something went wrong! Restart the app & check your internet connection!";
             }

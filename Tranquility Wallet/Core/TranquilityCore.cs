@@ -31,7 +31,7 @@ namespace Tranquility.Core
                 ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
                 localSettings.Values["RPC_provider"] = value;
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -44,7 +44,7 @@ namespace Tranquility.Core
                 String rpc = localSettings.Values["RPC_provider"] as string;
                 WalletRPCprovider = rpc;
             }
-            catch (Exception ex)
+            catch
             {
 
             }
