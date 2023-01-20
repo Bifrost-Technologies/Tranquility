@@ -5,34 +5,38 @@
     xmlns:local="using:Tranquility.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
+    <Page.Background>
+        <AcrylicBrush TintColor="#CC0084FF" BackgroundSource="HostBackdrop" TintOpacity="0.25" AlwaysUseFallback="False"/>
+    </Page.Background>
 
-    <Grid Background="#FF191919" BorderBrush="#FF00D6FF" RequestedTheme="Dark">
-        <Border x:Name="pageborder" BorderBrush="#FF00D6FF" BorderThickness="1" Margin="33,59,29,40" Background="#FF0E0E0E"/>
+    <Grid BorderBrush="#FF00D6FF" RequestedTheme="Dark">
+        <Border x:Name="pageborder" BorderBrush="{StaticResource BifrostBorder4}" BorderThickness="1" Margin="29,59,29,28" CornerRadius="20,20,20,20"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="239,408,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="477" Height="74" FontSize="16" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Segoe UI Variable Display Semibold" SelectionHighlightColor="#FF00D6FF"><Run Text="Receive SOL, Solana NFTs, or Solana Tokens by sending assets to your wallet address!"/><Run Text=" "/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="239,178,0,0" TextWrapping="Wrap" Text="Your wallet address is:" VerticalAlignment="Top" Width="540" Height="37" FontSize="18" SelectionChanged="TextBlock_SelectionChanged_1"/>
-        <TextBlock x:Name="WalletAddressDisplayBlock" HorizontalAlignment="Left" Margin="174,248,0,0" TextWrapping="Wrap" Text="0x0" VerticalAlignment="Top" Width="618" Height="73" FontSize="20" FontFamily="Segoe UI Variable Display" TextAlignment="Center" FocusVisualPrimaryBrush="White" Foreground="White" RenderTransformOrigin="0.554,0.418"/>
-        <Image HorizontalAlignment="Left" Height="152" VerticalAlignment="Top" Width="107" Source="/Assets/TranquilityMithril-transparent.png" FocusVisualPrimaryBrush="{x:Null}" Margin="428,37,0,0"/>
-        <Button x:Name="Copybutton" Content="Copy" Margin="0,344,0,0" VerticalAlignment="Top" RequestedTheme="Dark" Background="{x:Null}" BorderBrush="#FF00D6FF" Height="34" Width="135" Click="Copybutton_Click" HorizontalAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,330,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="477" Height="74" FontSize="16" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Segoe UI Variable Display Semibold" SelectionHighlightColor="#FF00D6FF"><Run Text="Receive SOL, Solana NFTs, or Solana Tokens by sending assets to your wallet address!"/><Run Text=" "/></TextBlock>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Your wallet address is:" VerticalAlignment="Center" Width="540" Height="37" FontSize="18" SelectionChanged="TextBlock_SelectionChanged_1" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" Margin="0,0,1,200"/>
+        <TextBlock x:Name="WalletAddressDisplayBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="0x0" VerticalAlignment="Center" Width="739" Height="73" FontSize="20" FontFamily="Segoe UI Variable Display" TextAlignment="Center" FocusVisualPrimaryBrush="{x:Null}" Foreground="White" RenderTransformOrigin="0.554,0.418" Margin="0,0,1,50" FocusVisualSecondaryBrush="{x:Null}"/>
+        <Button x:Name="Copybutton" Content="Copy" Margin="0,135,0,0" VerticalAlignment="Center" RequestedTheme="Dark" Background="{x:Null}" BorderBrush="{StaticResource BifrostBorder4}" Height="34" Width="135" Click="Copybutton_Click" HorizontalAlignment="Center" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1"/>
         <TextBlock x:Name="MessageBlock" HorizontalAlignment="Left" Margin="205,304,0,0" TextWrapping="Wrap" Text="Message Box" VerticalAlignment="Top" Width="540" Height="34" FontSize="18" SelectionChanged="TextBlock_SelectionChanged_1" TextAlignment="Center" FocusVisualPrimaryBrush="#FFFFBB00" Foreground="#FFFFC700" Visibility="Collapsed"/>
-        <Canvas Background="Black" Margin="0,0,0,496">
-            <Button x:Name="OverviewNavButton" Height="37" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Background="#33565656" Click="OverviewNavButton_Click" Canvas.Top="4" Canvas.Left="10">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF246;"/>
+        <Canvas Height="45" VerticalAlignment="Top" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
+            <Button x:Name="OverviewNavButton" Height="37" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Background="#33565656" Click="OverviewNavButton_Click" Canvas.Top="4" Canvas.Left="10" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE825;"/>
             </Button>
-            <Button x:Name="ReceiveNavButton" Height="37" Canvas.Left="55" Background="#33565656" Click="ReceiveNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEA58;"/>
+            <Button x:Name="ReceiveNavButton" Height="37" Canvas.Left="55" Background="#33565656" Click="ReceiveNavButton_Click" Canvas.Top="4" VerticalAlignment="Top" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8A1;"/>
             </Button>
 
-            <Button x:Name="SendNavButton" Height="37" Canvas.Left="100" Background="#33565656" Click="SendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
+            <Button x:Name="SendNavButton" Height="37" Canvas.Left="100" Background="#33565656" Click="SendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE724;"/>
             </Button>
-            <Button x:Name="InventorySendNavButton" Height="37" Canvas.Left="145" Background="#33565656" Click="InventorySendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
+            <Button x:Name="InventorySendNavButton" Height="37" Canvas.Left="145" Background="#33565656" Click="InventorySendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE725;"/>
             </Button>
-            <Button x:Name="Settings" Height="37" Canvas.Left="190" Background="#33565656" Click="Settings_Click" Canvas.Top="4" VerticalAlignment="Top">
+            <Button x:Name="Settings" Height="37" Canvas.Left="246" Background="#33565656" Click="Settings_Click" Canvas.Top="4" CornerRadius="5,5,5,5">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF8B0;"/>
+            </Button>
+            <Button x:Name="Settings_Copy" Height="37" Canvas.Left="195" Background="#33565656" Click="OpenSerum_Click" Canvas.Top="4" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE736;"/>
             </Button>
         </Canvas>
 

@@ -1,0 +1,328 @@
+﻿<Page
+    x:Class="Tranquility.Views.Trade"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Custom="using:Microsoft.UI.Xaml.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Tranquility.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FocusVisualPrimaryBrush="{x:Null}"
+    mc:Ignorable="d">
+    <Page.FocusVisualSecondaryBrush>
+        <AcrylicBrush
+            AlwaysUseFallback="False"
+            BackgroundSource="HostBackdrop"
+            TintColor="#CC0084FF"
+            TintOpacity="0.25" />
+    </Page.FocusVisualSecondaryBrush>
+    <Page.Background>
+        <AcrylicBrush
+            AlwaysUseFallback="False"
+            BackgroundSource="HostBackdrop"
+            FallbackColor="#000084FF"
+            TintColor="#CC0084FF"
+            TintOpacity="0.25" />
+    </Page.Background>
+
+    <Grid FocusVisualSecondaryBrush="{x:Null}" RequestedTheme="Dark">
+        <Grid.FocusVisualPrimaryBrush>
+            <AcrylicBrush
+                BackgroundSource="HostBackdrop"
+                TintColor="#CC0084FF"
+                TintOpacity="0.25" />
+        </Grid.FocusVisualPrimaryBrush>
+        <Border
+            x:Name="pageborder"
+            Margin="24,50,28,16"
+            BorderBrush="{StaticResource BifrostBorder4}"
+            BorderThickness="1,1,1,1"
+            CornerRadius="20,20,20,20">
+            <Canvas FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
+
+                <TextBox
+                    x:Name="priceField"
+                    Canvas.Left="537"
+                    Canvas.Top="197"
+                    Width="317"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    BorderBrush="{StaticResource BifrostBorder4}"
+                    BorderThickness="2,2,2,2"
+                    CornerRadius="10,10,10,10"
+                    FocusVisualPrimaryBrush="#FF009CFF"
+                    FocusVisualSecondaryBrush="{x:Null}"
+                    InputScope="Number"
+                    PlaceholderText="Enter the price you wish to buy or sell at"
+                    SelectionHighlightColor="#FF00A7FF"
+                    SelectionHighlightColorWhenNotFocused="#FF00A7FF"
+                    Text=""
+                    TextWrapping="Wrap" />
+                <TextBox
+                    x:Name="sizeField"
+                    Canvas.Left="537"
+                    Canvas.Top="271"
+                    Width="320"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    BorderBrush="{StaticResource BifrostBorder4}"
+                    BorderThickness="2,2,2,2"
+                    CornerRadius="10,10,10,10"
+                    FocusVisualPrimaryBrush="#FF009CFF"
+                    FocusVisualSecondaryBrush="{x:Null}"
+                    InputScope="Number"
+                    PlaceholderText="The amount of tokens you wish to buy or sell"
+                    SelectionHighlightColor="#FF00A7FF"
+                    SelectionHighlightColorWhenNotFocused="#FF00A7FF"
+                    Text=""
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Canvas.Left="537"
+                    Canvas.Top="172"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    RenderTransformOrigin="0.567,-1.068"
+                    Text="Price:"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Canvas.Left="537"
+                    Canvas.Top="246"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    RenderTransformOrigin="0.567,-1.068"
+                    Text="Size:"
+                    TextWrapping="Wrap" />
+                <Button
+                    x:Name="PlaceOrderButton"
+                    Canvas.Left="624"
+                    Canvas.Top="339"
+                    Width="143"
+                    Height="40"
+                    VerticalAlignment="Top"
+                    Background="{x:Null}"
+                    BorderBrush="{StaticResource BifrostBorder4}"
+                    BorderThickness="1,1,1,1"
+                    Click="Transfer_Click"
+                    Content="Place Order"
+                    CornerRadius="5,5,5,5"
+                    FocusVisualPrimaryBrush="{x:Null}"
+                    FocusVisualSecondaryBrush="{x:Null}" />
+                <Button
+                    x:Name="PlaceOrderButton_Copy1"
+                    Canvas.Left="582"
+                    Canvas.Top="422"
+                    Width="235"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Background="{x:Null}"
+                    BorderBrush="{StaticResource BifrostBorder4}"
+                    BorderThickness="1,1,1,1"
+                    Click="Transfer_Click"
+                    Content="Order Management"
+                    CornerRadius="5,5,5,5"
+                    FocusVisualPrimaryBrush="{x:Null}"
+                    FocusVisualSecondaryBrush="{x:Null}" />
+                <ToggleSwitch
+                    x:Name="OrderTypeSwitch"
+                    Canvas.Left="537"
+                    Canvas.Top="98"
+                    Width="110"
+                    Header="Order Type"
+                    OffContent="Buy"
+                    OnContent="Sell" />
+                <ComboBox
+                    x:Name="OpenBookMarketSelector"
+                    Canvas.Left="537"
+                    Canvas.Top="42"
+                    Width="320"
+                    VerticalAlignment="Center"
+                    SelectionChanged="ComboBox_SelectionChanged" />
+                <TextBlock
+                    Canvas.Left="537"
+                    Canvas.Top="17"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    RenderTransformOrigin="0.567,-1.068"
+                    Text="Token:"
+                    TextWrapping="Wrap" />
+                <ListView
+                    x:Name="BuyOrders"
+                    Canvas.Left="10"
+                    Canvas.Top="246"
+                    Width="443"
+                    MaxHeight="215"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ListViewItem>
+                        <Canvas Width="421" Height="38">
+                            <ProgressBar
+                                Canvas.Left="10"
+                                Canvas.Top="7"
+                                Width="330"
+                                Height="24"
+                                HorizontalAlignment="Left"
+                                Foreground="#FF009802" />
+                            <TextBlock
+                                Canvas.Left="18"
+                                Canvas.Top="13"
+                                FontSize="9"
+                                FontWeight="Bold"
+                                Text="0 Token"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                Width="66"
+                                Height="15"
+                                Margin="350,10,0,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FontSize="8"
+                                Text="0.001"
+                                TextWrapping="Wrap" />
+                        </Canvas>
+                    </ListViewItem>
+                </ListView>
+                <ListView
+                    x:Name="SellOrders"
+                    Canvas.Left="10"
+                    Canvas.Top="11"
+                    Width="443"
+                    MaxHeight="200"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    <ListViewItem>
+                        <Canvas Width="421" Height="38">
+                            <ProgressBar
+                                Canvas.Left="10"
+                                Canvas.Top="7"
+                                Width="330"
+                                Height="24"
+                                HorizontalAlignment="Left"
+                                Foreground="#FFA70101" />
+                            <TextBlock
+                                Canvas.Left="18"
+                                Canvas.Top="13"
+                                FontSize="9"
+                                FontWeight="Bold"
+                                Text="0 Token"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                Width="66"
+                                Height="15"
+                                Margin="350,10,0,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FontSize="8"
+                                Text="0.001"
+                                TextWrapping="Wrap" />
+                        </Canvas>
+                    </ListViewItem>
+                </ListView>
+                <TextBlock
+                    x:Name="medianpriceLabel"
+                    Canvas.Left="176"
+                    Canvas.Top="216"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="15"
+                    Text="0.0"
+                    TextWrapping="Wrap" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </Canvas>
+
+        </Border>
+        <Canvas
+            Height="45"
+            VerticalAlignment="Top"
+            FocusVisualPrimaryBrush="{x:Null}"
+            FocusVisualSecondaryBrush="{x:Null}">
+            <Button
+                x:Name="OverviewNavButton"
+                Canvas.Left="10"
+                Canvas.Top="4"
+                Height="37"
+                VerticalAlignment="Top"
+                Background="#33565656"
+                Click="OverviewNavButton_Click"
+                CornerRadius="5,5,5,5"
+                FontFamily="Segoe Fluent Icons">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE825;" />
+            </Button>
+            <Button
+                x:Name="ReceiveNavButton"
+                Canvas.Left="55"
+                Canvas.Top="4"
+                Height="37"
+                VerticalAlignment="Top"
+                Background="#33565656"
+                Click="ReceiveNavButton_Click"
+                CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8A1;" />
+            </Button>
+
+            <Button
+                x:Name="SendNavButton"
+                Canvas.Left="100"
+                Canvas.Top="4"
+                Height="37"
+                VerticalAlignment="Top"
+                Background="#33565656"
+                Click="SendNavButton_Click"
+                CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE724;" />
+            </Button>
+            <Button
+                x:Name="InventorySendNavButton"
+                Canvas.Left="145"
+                Canvas.Top="4"
+                Height="37"
+                VerticalAlignment="Top"
+                Background="#33565656"
+                Click="InventorySendNavButton_Click"
+                CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE725;" />
+            </Button>
+            <Button
+                x:Name="Settings"
+                Canvas.Left="246"
+                Canvas.Top="4"
+                Height="37"
+                Background="#33565656"
+                Click="Settings_Click"
+                CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF8B0;" />
+            </Button>
+            <Button
+                x:Name="TradeNavButton"
+                Canvas.Left="195"
+                Canvas.Top="4"
+                Height="37"
+                Background="#33565656"
+                Click="OpenSerum_Click"
+                CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE736;" />
+            </Button>
+        </Canvas>
+
+
+    </Grid>
+</Page>

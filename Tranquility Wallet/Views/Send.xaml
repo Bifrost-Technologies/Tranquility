@@ -5,18 +5,26 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Class="Tranquility.Views.Send"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d" FocusVisualPrimaryBrush="{x:Null}">
+    <Page.FocusVisualSecondaryBrush>
+        <AcrylicBrush TintColor="#CC0084FF" BackgroundSource="HostBackdrop" TintOpacity="0.25" AlwaysUseFallback="False"/>
+    </Page.FocusVisualSecondaryBrush>
+    <Page.Background>
+        <AcrylicBrush TintColor="#CC0084FF" BackgroundSource="HostBackdrop" TintOpacity="0.25" AlwaysUseFallback="False" FallbackColor="#000084FF"/>
+    </Page.Background>
 
-    <Grid Background="#FF191919" RequestedTheme="Dark">
-        <Border x:Name="pageborder" BorderBrush="#FF00D6FF" BorderThickness="2,2,2,2" Margin="24,50,28,16" Background="#FF0E0E0E">
-            <Canvas>
-                <TextBox x:Name="SolanaAddressSendField" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="612" Height="32" PlaceholderText="Solana address to send to" ToolTipService.ToolTip="This is the address you wish to send SOL or tokens to" Canvas.Left="147" Canvas.Top="135" SelectionHighlightColor="#FF00D6FF"/>
-                <ComboBox x:Name="TokenWalletSelector" Width="279" PlaceholderText="Select a currency in your wallet" SelectionChanged="TokenWalletSelector_SelectionChanged" ToolTipService.ToolTip="If you have token accounts they will displayed here" Canvas.Left="147" Canvas.Top="290" HorizontalAlignment="Center"/>
-                <TextBox x:Name="SendAmountField" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="450" Height="33" InputScope="Number" PlaceholderText="Amount to send" ToolTipService.ToolTip="This is the amount to send in the transfer" Canvas.Left="147" Canvas.Top="198" SelectionHighlightColor="#FF00D6FF"/>
+    <Grid RequestedTheme="Dark" FocusVisualSecondaryBrush="{x:Null}">
+        <Grid.FocusVisualPrimaryBrush>
+            <AcrylicBrush TintColor="#CC0084FF" BackgroundSource="HostBackdrop" TintOpacity="0.25"/>
+        </Grid.FocusVisualPrimaryBrush>
+        <Border x:Name="pageborder" BorderBrush="{StaticResource BifrostBorder4}" BorderThickness="1,1,1,1" Margin="24,50,28,16" CornerRadius="20,20,20,20">
+            <Canvas FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
+                <ComboBox BorderBrush="{StaticResource BifrostBorder4}" x:Name="TokenWalletSelector" Width="279" PlaceholderText="Select a currency in your wallet" SelectionChanged="TokenWalletSelector_SelectionChanged" ToolTipService.ToolTip="If you have token accounts they will displayed here" Canvas.Left="147" Canvas.Top="290" HorizontalAlignment="Center" CornerRadius="10,10,10,10" Background="{x:Null}" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
+                </ComboBox>
+                <TextBox x:Name="SendAmountField" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="450" Height="33" InputScope="Number" PlaceholderText="Amount to send" ToolTipService.ToolTip="This is the amount to send in the transfer" Canvas.Left="147" Canvas.Top="198" SelectionHighlightColor="#FF00A7FF" CornerRadius="10,10,10,10" Background="{x:Null}" SelectionHighlightColorWhenNotFocused="#FF00A7FF" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" BorderBrush="{StaticResource BifrostBorder4}"/>
                 <TextBlock x:Name="BalanceLabel" HorizontalAlignment="Center" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Foreground="#FF909090" ToolTipService.ToolTip="Selected TokenAccount balance" Canvas.Left="516" Canvas.Top="297" FontSize="15"/>
-                <Button x:Name="TransferButton" Content="Transfer" VerticalAlignment="Top" Width="143" Height="40" Click="Transfer_Click" BorderBrush="#FF00D6FF" BorderThickness="1,1,1,1" Canvas.Left="616" Canvas.Top="368"/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Transfer Solana Currencies" VerticalAlignment="Center" FontSize="21" FontWeight="Bold" Canvas.Left="343" Canvas.Top="42" Width="313"/>
+                <Button x:Name="TransferButton" Content="Transfer" VerticalAlignment="Top" Width="143" Height="40" Click="Transfer_Click" BorderThickness="1,1,1,1" Canvas.Left="616" Canvas.Top="368" CornerRadius="5,5,5,5" Background="{x:Null}" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" BorderBrush="{StaticResource BifrostBorder4}"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Transfer Solana Currencies" VerticalAlignment="Center" FontSize="21" FontWeight="Bold" Canvas.Left="343" Canvas.Top="42" Width="313" FocusVisualPrimaryBrush="{x:Null}" SelectionHighlightColor="#FF00CAFF"/>
                 <TextBlock x:Name="BalanceTitleLabel" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Balance: " VerticalAlignment="Top" Foreground="#FF909090" ToolTipService.ToolTip="Selected TokenAccount balance" Canvas.Left="453" Canvas.Top="297" FontSize="15"/>
                 <TextBlock
                     x:Name="MessageBlock"
@@ -24,6 +32,8 @@
                     Foreground="#FFFFDE00"
                     Text=""
                     TextWrapping="Wrap" Visibility="Visible" HorizontalAlignment="Left" Canvas.Left="452" Canvas.Top="95" VerticalAlignment="Top" />
+                <TextBox BorderBrush="{StaticResource BifrostBorder4}" x:Name="SolanaAddressSendField" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="612" Height="32" PlaceholderText="Solana address to send to" ToolTipService.ToolTip="This is the address you wish to send SOL or tokens to" Canvas.Left="147" Canvas.Top="119" SelectionHighlightColor="#FF00D6FF" CornerRadius="10,10,10,10" SelectionHighlightColorWhenNotFocused="#FF00A7FF" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" BorderThickness="1,1,1,1" Background="{x:Null}">
+                </TextBox>
 
 
 
@@ -31,22 +41,25 @@
             </Canvas>
 
         </Border>
-        <Canvas Background="Black" Margin="0,0,0,496">
-            <Button x:Name="OverviewNavButton" Height="37" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Background="#33565656" Click="OverviewNavButton_Click" Canvas.Top="4" Canvas.Left="10">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF246;"/>
+        <Canvas Height="45" VerticalAlignment="Top" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
+            <Button x:Name="OverviewNavButton" Height="37" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Background="#33565656" Click="OverviewNavButton_Click" Canvas.Top="4" Canvas.Left="10" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE825;"/>
             </Button>
-            <Button x:Name="ReceiveNavButton" Height="37" Canvas.Left="55" Background="#33565656" Click="ReceiveNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEA58;"/>
+            <Button x:Name="ReceiveNavButton" Height="37" Canvas.Left="55" Background="#33565656" Click="ReceiveNavButton_Click" Canvas.Top="4" VerticalAlignment="Top" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8A1;"/>
             </Button>
 
-            <Button x:Name="SendNavButton" Height="37" Canvas.Left="100" Background="#33565656" Click="SendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
+            <Button x:Name="SendNavButton" Height="37" Canvas.Left="100" Background="#33565656" Click="SendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE724;"/>
             </Button>
-            <Button x:Name="InventorySendNavButton" Height="37" Canvas.Left="145" Background="#33565656" Click="InventorySendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
+            <Button x:Name="InventorySendNavButton" Height="37" Canvas.Left="145" Background="#33565656" Click="InventorySendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top" CornerRadius="5,5,5,5">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE725;"/>
             </Button>
-            <Button x:Name="Settings" Height="37" Canvas.Left="190" Background="#33565656" Click="Settings_Click" Canvas.Top="4" VerticalAlignment="Top">
+            <Button x:Name="Settings" Height="37" Canvas.Left="246" Background="#33565656" Click="Settings_Click" Canvas.Top="4" CornerRadius="5,5,5,5">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF8B0;"/>
+            </Button>
+            <Button x:Name="Settings_Copy" Height="37" Canvas.Left="195" Background="#33565656" Click="OpenSerum_Click" Canvas.Top="4" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE736;"/>
             </Button>
         </Canvas>
 

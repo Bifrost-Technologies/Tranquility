@@ -57,12 +57,13 @@ namespace Tranquility
             
             Storage.SolanaVault _solanaVault = new Storage.SolanaVault();
            Core.Runtime.LoadRPCProvider();
-           if (Core.Runtime.WalletRPCprovider == null)
+           if (Core.Runtime.WalletRPCprovider == null | Core.Runtime.WalletRPCprovider == String.Empty)
            {
-               Core.Runtime.WalletRPCprovider = "https://falling-light-sailboat.solana-mainnet.discover.quiknode.pro/5236d424fa1fd0f1e0fda142470aea120c0d2e3f/";
+               Core.Runtime.WalletRPCprovider = "https://cold-smart-friday.solana-mainnet.discover.quiknode.pro/72b2abc7eb8dd76a205f25f0144e3d992d5b134b/";
            }
            Core.Runtime.SolanaVault = _solanaVault;
-           await Task.Delay(50);
+            Core.Runtime.openbookMarkets = await Trading.OpenBookAPI.GetMarkets();
+            await Task.Delay(50);
             Core.Runtime.tokenMintDatabase = await Solnet.Extensions.TokenMintResolver.LoadAsync();
           
 

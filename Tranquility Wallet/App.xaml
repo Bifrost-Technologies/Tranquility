@@ -2,4 +2,46 @@
     x:Class="Tranquility.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Tranquility" />
+    xmlns:local="using:Tranquility">
+    <Application.Resources>
+        <SolidColorBrush
+            x:Key="TextControlBackgroundFocused"
+            Opacity="0.2"
+            Color="Black" />
+        <SolidColorBrush
+            x:Key="TextControlForeground"
+            Opacity="0.2"
+            Color="White" />
+        <SolidColorBrush
+            x:Key="TextControlPlaceholderForegroundFocused"
+            Opacity="0.2"
+            Color="White" />
+        <SolidColorBrush x:Key="TextControlForegroundFocused" Color="White" />
+        <SolidColorBrush
+            x:Key="TextControlBorderBrushFocused"
+            Opacity="0.2"
+            Color="White" />
+        <LinearGradientBrush x:Key="BifrostButton" MappingMode="Absolute" EndPoint="0,3">
+            <GradientStop Offset="0.33" Color="#18FFFFFF" />
+            <GradientStop Offset="1" Color="#FF00A7FF" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BifrostBorder2" MappingMode="Absolute" EndPoint="0,3">
+            <GradientStop Offset="0" Color="#18FFFFFF" />
+            <GradientStop Offset="0.701" Color="#FF00A7FF" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BifrostBorder3" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0" Color="#2600A7FF" />
+            <GradientStop Offset="1" Color="#FF00A7FF" />
+        </LinearGradientBrush>
+        <AcrylicBrush
+            x:Key="GlassTheme"
+            BackgroundSource="HostBackdrop"
+            FallbackColor="#190084FF"
+            TintColor="#CC0084FF"
+            TintOpacity="0.25" />
+        <LinearGradientBrush x:Key="BifrostBorder4" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0" Color="#FF006DFF" />
+            <GradientStop Offset="1" Color="#FF00A7FF" />
+        </LinearGradientBrush>
+    </Application.Resources>
+</Application>
