@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Bifrost Inc.")]
 [assembly: AssemblyProduct("Tranquility Wallet")]
-[assembly: AssemblyCopyright("Copyright © Bifrost Inc. 2022")]
+[assembly: AssemblyCopyright("Copyright © Bifrost Inc. 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

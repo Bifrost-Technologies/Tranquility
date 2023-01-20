@@ -6,65 +6,58 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    
     xmlns:xaml="using:Windows.UI.Xaml"
-    mc:Ignorable="d" RequestedTheme="Dark">
+    mc:Ignorable="d" RequestedTheme="Dark" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
+    <Page.Resources>
+        <LinearGradientBrush x:Key="ButtonBorder" EndPoint="0,3" MappingMode="Absolute">
+            <GradientStop Color="#18FFFFFF" Offset="0.33"/>
+            <GradientStop Color="#FF00A7FF" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Resources>
+    <Page.Background>
+        <StaticResource ResourceKey="GlassTheme"/>
+    </Page.Background>
 
-    <Grid Background="#FF191919">
+    <Grid FocusVisualSecondaryBrush="{x:Null}" FocusVisualPrimaryBrush="{x:Null}">
         <StackPanel
             x:Name="ContentArea" RequestedTheme="Dark">
+            <Canvas Height="45" VerticalAlignment="Top" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
+            <Button x:Name="OverviewNavButton" Height="37" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Background="#33565656" Click="OverviewNavButton_Click" Canvas.Top="4" Canvas.Left="10" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE825;"/>
+            </Button>
+            <Button x:Name="ReceiveNavButton" Height="37" Canvas.Left="55" Background="#33565656" Click="ReceiveNavButton_Click" Canvas.Top="4" VerticalAlignment="Top" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8A1;"/>
+            </Button>
 
-            <Canvas Height="46" Width="958" Background="Black">
-                <Button x:Name="OverviewNavButton" Height="37" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Background="#33565656" Click="OverviewNavButton_Click" Canvas.Top="4" Canvas.Left="10">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF246;"/>
-                </Button>
-                <Button x:Name="ReceiveNavButton" Height="37" Canvas.Left="55" Background="#33565656" Click="ReceiveNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEA58;"/>
-                </Button>
-
-                <Button x:Name="SendNavButton" Height="37" Canvas.Left="100" Background="#33565656" Click="SendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE724;"/>
-                </Button>
-                <Button x:Name="InventorySendNavButton" Height="37" Canvas.Left="145" Background="#33565656" Click="InventorySendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE725;"/>
-                </Button>
-                <Button x:Name="Settings" Height="37" Canvas.Left="190" Background="#33565656" Click="Settings_Click" Canvas.Top="4" VerticalAlignment="Top" BorderThickness="1,1,1,1">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF8B0;"/>
-                </Button>
-            </Canvas>
-
-            <Canvas Height="491">
-                <Button x:Name="save_rpc" Content="Save" Canvas.Left="831" Canvas.Top="193" BorderThickness="2,3,2,2" Click="save_rpc_Click" Width="98" VerticalAlignment="Top">
-                    <Button.BorderBrush>
-                        <LinearGradientBrush EndPoint="0,3" MappingMode="Absolute">
-                            <GradientStop Color="#18FFFFFF" Offset="0.33"/>
-                            <GradientStop Color="#FF00A7FF" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.BorderBrush>
-                </Button>
-                <TextBox x:Name="rpcfield" Canvas.Left="51" TextWrapping="Wrap" Text="" Canvas.Top="188" Width="757" BorderThickness="2,2,2,2" SelectionHighlightColor="#FF00A7FF" PlaceholderText="Custom RPC endpoint goes here" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="38" MaxWidth="800" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="55"/>
+            <Button x:Name="SendNavButton" Height="37" Canvas.Left="100" Background="#33565656" Click="SendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE724;"/>
+            </Button>
+            <Button x:Name="InventorySendNavButton" Height="37" Canvas.Left="145" Background="#33565656" Click="InventorySendNavButton_Click" Canvas.Top="4" VerticalAlignment="Top" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE725;"/>
+            </Button>
+            <Button x:Name="Settings" Height="37" Canvas.Left="246" Background="#33565656" Click="Settings_Click" Canvas.Top="4" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF8B0;"/>
+            </Button>
+            <Button x:Name="Settings_Copy" Height="37" Canvas.Left="195" Background="#33565656" Click="OpenSerum_Click" Canvas.Top="4" CornerRadius="5,5,5,5">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE736;"/>
+            </Button>
+        </Canvas>
+            <Canvas Height="491" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
+                <Button x:Name="save_rpc" Content="Save" Canvas.Left="831" Canvas.Top="193" BorderThickness="1,1,1,1" Click="save_rpc_Click" Width="98" VerticalAlignment="Center" CornerRadius="5,5,5,5" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{StaticResource BifrostBorder4}"/>
+                <TextBox x:Name="rpcfield" Canvas.Left="51" TextWrapping="Wrap" Text="" Canvas.Top="188" Width="757" BorderThickness="2,2,2,2" SelectionHighlightColor="#FF00A7FF" PlaceholderText="Custom RPC endpoint goes here" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="38" MaxWidth="800" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="55" CornerRadius="10,10,10,10" RequestedTheme="Default" FocusVisualPrimaryBrush="#FF333333" BorderBrush="{StaticResource BifrostBorder4}"/>
                 <TextBlock Canvas.Left="70" TextWrapping="Wrap" Text="Rpc Provider" Canvas.Top="150" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.567,-1.068"/>
-                <Button x:Name="unlock_seed" Content="Unlock" Canvas.Left="777" Canvas.Top="331" BorderThickness="2,3,2,2" Click="unlock_seed_Click" Width="108" VerticalAlignment="Top" HorizontalAlignment="Center">
-                    <Button.BorderBrush>
-                        <LinearGradientBrush EndPoint="0,3" MappingMode="Absolute">
-                            <GradientStop Color="#18FFFFFF" Offset="0.33"/>
-                            <GradientStop Color="#FF00A7FF" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.BorderBrush>
+                <Button x:Name="unlock_seed" Content="Unlock" Canvas.Left="777" Canvas.Top="331" BorderThickness="1,1,1,1" Click="unlock_seed_Click" Width="108" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="5,5,5,5" Background="{x:Null}" BorderBrush="{StaticResource BifrostBorder4}"/>
+                <TextBlock Canvas.Left="70" TextWrapping="Wrap" Text="Recover Seed Phrase for backup" Canvas.Top="291" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionHighlightColor="#FF00A7FF"/>
+                <PasswordBox x:Name="seedphrase_passphasefield" Canvas.Left="52" Canvas.Top="331" HorizontalAlignment="Center" VerticalAlignment="Center" Width="696" PlaceholderText="Enter the passphrase to your wallet" SelectionHighlightColor="#FF00A7FF" CornerRadius="10,10,10,10" BorderBrush="{StaticResource BifrostBorder4}"/>
+                <TextBox x:Name="PhraseDisplay" Canvas.Left="169" TextWrapping="Wrap" Text="" Canvas.Top="389" HorizontalAlignment="Center" VerticalAlignment="Center" Width="623" Height="68" IsReadOnly="True" CornerRadius="10,10,10,10" SelectionHighlightColor="#FF00BAF9" Background="{x:Null}" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" BorderBrush="{StaticResource BifrostBorder4}"/>
+                <Button BorderBrush="{StaticResource BifrostBorder4}" x:Name="subaccCreation" Content="Add Account" Canvas.Left="395" Canvas.Top="56" BorderThickness="1,1,1,1" Click="createAcc_Click" Width="171" VerticalAlignment="Center" Height="43" HorizontalAlignment="Center" CornerRadius="5,5,5,5" Background="{x:Null}">
                 </Button>
-                <TextBlock Canvas.Left="70" TextWrapping="Wrap" Text="Recover Seed Phrase for backup" Canvas.Top="291" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <PasswordBox x:Name="seedphrase_passphasefield" Canvas.Left="52" Canvas.Top="331" HorizontalAlignment="Center" VerticalAlignment="Top" Width="696" PlaceholderText="Enter the passphrase to your wallet" SelectionHighlightColor="#FF00A7FF"/>
-                <TextBox x:Name="PhraseDisplay" Canvas.Left="169" TextWrapping="Wrap" Text="" Canvas.Top="389" HorizontalAlignment="Left" VerticalAlignment="Top" Width="623" Height="68" IsReadOnly="True"/>
-                <Button x:Name="subaccCreation" Content="Add Account" Canvas.Left="395" Canvas.Top="56" BorderThickness="2,3,2,2" Click="createAcc_Click" Width="171" VerticalAlignment="Top" Height="43" HorizontalAlignment="Center">
-                    <Button.BorderBrush>
-                        <LinearGradientBrush EndPoint="0,3" MappingMode="Absolute">
-                            <GradientStop Color="#18FFFFFF" Offset="0.33"/>
-                            <GradientStop Color="#FF00A7FF" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.BorderBrush>
-                </Button>
-                <TextBox x:Name="indexSelector" Canvas.Left="52" TextWrapping="Wrap" Text="" Canvas.Top="65" Width="320" BorderThickness="2,2,2,2" SelectionHighlightColor="#FF00A7FF" HorizontalAlignment="Left" VerticalAlignment="Top" InputScope="Number" PlaceholderText="Enter wallet index to create a new sub-account"/>
-                <TextBlock Canvas.Left="70" TextWrapping="Wrap" Text="New Sub-Account" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="30"/>
+                <TextBox x:Name="indexSelector" Canvas.Left="52" TextWrapping="Wrap" Text="" Canvas.Top="65" Width="320" BorderThickness="2,2,2,2" SelectionHighlightColor="#FF00A7FF" HorizontalAlignment="Left" VerticalAlignment="Top" InputScope="Number" PlaceholderText="Enter wallet index to create a new sub-account" CornerRadius="10,10,10,10" FocusVisualPrimaryBrush="#FF009CFF" FocusVisualSecondaryBrush="{x:Null}" SelectionHighlightColorWhenNotFocused="#FF00A7FF" BorderBrush="{StaticResource BifrostBorder4}"/>
+                <TextBlock Canvas.Left="70" TextWrapping="Wrap" Text="New Sub-Account" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="30" SelectionHighlightColor="#FF009CFF"/>
+
             </Canvas>
         </StackPanel>
-      
+   
+
+
     </Grid>
 </Page>

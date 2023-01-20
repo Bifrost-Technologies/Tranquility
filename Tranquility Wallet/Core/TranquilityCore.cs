@@ -8,6 +8,8 @@ using Windows.UI.Xaml;
 using Tranquility.Views;
 using Solana.Metaplex;
 using Windows.Storage;
+using Solnet.Serum.Models;
+using Solnet.Serum;
 
 namespace Tranquility.Core
 {
@@ -18,12 +20,16 @@ namespace Tranquility.Core
         public static bool overviewInitialized { get; set; }
         public static List<MetadataAccount> Inventory { get; set; }
         public static string WalletRPCprovider { get; set; }
+        public static KeyValuePair<List<OpenOrder>, List<OpenOrder>> ActiveOrderBook { get; set; }
         public static TokenWallet tokenWallet { get; set; }
+        public static List<MarketInfo> openbookMarkets { get; set; }
         public static bool SuccessfullyLoaded { get; set; }
         public static bool SuccessfullyLoadedAV { get; set; }
         public static bool SuccessfullyLoadedWI { get; set; }
         public static TokenMintResolver tokenMintDatabase { get; set; }
         public static int SelectedAccount { get; set; }
+        public static IMarketManager MarketManager { get; set; }
+        public static ISerumClient SerumClient { get; set; }
         public static void SaveRPCProvider(string value)
         {
             try

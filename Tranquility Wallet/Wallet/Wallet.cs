@@ -6,6 +6,7 @@ using Solnet.Rpc.Builders;
 using Solnet.Rpc.Core.Http;
 using Solnet.Rpc.Messages;
 using Solnet.Rpc.Models;
+using Solnet.Serum;
 using Solnet.Wallet;
 using Solnet.Wallet.Bip39;
 using System;
@@ -20,6 +21,22 @@ namespace Tranquility.Wallets
 {
     public static class SolanaWallet
     {
+        private static Account TradingAccount { get; set; }
+
+
+        public static async Task Init()
+        {
+            var m = await Security.DataProtection.UnprotectData(Core.Runtime.SolanaVault.Wallet);
+            var k = await Security.DataProtection.UnprotectData(Core.Runtime.SolanaVault.ProtectedSessionKey);
+            Wallet _wallet = new Wallet(mnemonic: new Mnemonic(m), passphrase: k);
+            Account ActiveAcc = _wallet.GetAccount(Core.Runtime.SolanaVault.WalletIndexChart[Core.Runtime.SelectedAccount]);
+            TradingAccount = ActiveAcc;
+        }
+        public static void Snuff_TA()
+        {
+            TradingAccount = null;
+        }
+
         public static async void CreateNewWallet(string mnemomicPassword)
         {
             try
@@ -76,7 +93,7 @@ namespace Tranquility.Wallets
                 Wallet wallet = new Wallet(mnemonic: new Mnemonic(m), passphrase: k);
                 Account ActiveAcc = wallet.GetAccount(Core.Runtime.SolanaVault.WalletIndexChart[Core.Runtime.SelectedAccount]);
                 wallet = null;
-                var rpcClient = ClientFactory.GetClient(Core.Runtime.WalletRPCprovider);
+                var rpcClient = Solnet.Rpc.ClientFactory.GetClient(Core.Runtime.WalletRPCprovider);
                 var recipient = new PublicKey(recipientAddress);
                 Account walletOwner = ActiveAcc;
                 RequestResult<ResponseValue<BlockHash>> blockHash = await rpcClient.GetRecentBlockHashAsync();
@@ -105,7 +122,7 @@ namespace Tranquility.Wallets
                 Account ActiveAcc = wallet.GetAccount(Core.Runtime.SolanaVault.WalletIndexChart[Core.Runtime.SelectedAccount]);
                 wallet = null;
 
-                var rpcClient = ClientFactory.GetClient(Core.Runtime.WalletRPCprovider);
+                var rpcClient = Solnet.Rpc.ClientFactory.GetClient(Core.Runtime.WalletRPCprovider);
 
                 PublicKey mint = new PublicKey(mintAddress);
                 PublicKey recipient = new PublicKey(recipientAddress);
@@ -137,14 +154,22 @@ namespace Tranquility.Wallets
                 Wallet _wallet = new Wallet(mnemonic: new Mnemonic(m), passphrase: k);
                 Account ActiveAcc = _wallet.GetAccount(Core.Runtime.SolanaVault.WalletIndexChart[Core.Runtime.SelectedAccount]);
                 string _walletaddress = ActiveAcc.PublicKey;
+                Core.Runtime.SerumClient = Solnet.Serum.ClientFactory.GetClient(Cluster.MainNet);
+                await Core.Runtime.SerumClient.ConnectAsync();
+
+                // initialize market manager
+                Core.Runtime.MarketManager = MarketFactory.GetMarket(new PublicKey("8hbciUHgDWP8nvRWZBkrnWqyc94HqVhnUsRW76m75oMd"),  account: ActiveAcc, SignRequest, serumClient: Core.Runtime.SerumClient); 
+                await Core.Runtime.MarketManager.InitAsync();
                 m = null; k = null; _wallet = null; ActiveAcc = null;
-                var RPC_client = ClientFactory.GetClient(url: Core.Runtime.WalletRPCprovider);
+                var RPC_client = Solnet.Rpc.ClientFactory.GetClient(url: "https://cold-smart-friday.solana-mainnet.discover.quiknode.pro/72b2abc7eb8dd76a205f25f0144e3d992d5b134b/");
+               
+               
                 Core.Runtime.tokenWallet = await TokenWallet.LoadAsync(RPC_client, Core.Runtime.tokenMintDatabase, new PublicKey(key: _walletaddress));
                 Core.Runtime.SolanaVault.ActiveAccounts[Core.Runtime.SelectedAccount].Balance = Core.Runtime.tokenWallet.Sol.ToString();
             }
-            catch
+            catch(Exception aa)
             {
-
+Debug.WriteLine(aa);    
             }
         }
         public static async Task GenerateActiveAccounts()
@@ -158,7 +183,7 @@ namespace Tranquility.Wallets
                 Account ActiveAcc = _wallet.GetAccount(0);
                 string _walletaddress = ActiveAcc.PublicKey;
                 ActiveAcc = null;
-                var RPC_client = ClientFactory.GetClient(url: Core.Runtime.WalletRPCprovider);
+                var RPC_client = Solnet.Rpc.ClientFactory.GetClient(url: Core.Runtime.WalletRPCprovider);
                 Core.Runtime.tokenWallet = await TokenWallet.LoadAsync(RPC_client, Core.Runtime.tokenMintDatabase, new PublicKey(key: _walletaddress));
                 var _mainAccount = new ActiveAccount
                 {
@@ -205,6 +230,31 @@ namespace Tranquility.Wallets
 
             }
         }
+        private static byte[] SignRequest(ReadOnlySpan<byte> messageData)
+        {
+            
+
+            List<DecodedInstruction> ix =
+                InstructionDecoder.DecodeInstructions(Message.Deserialize(messageData));
+
+            string aggregate = ix.Aggregate(
+                "Decoded Instructions:",
+                (s, instruction) =>
+                {
+                    s += $"\n\tProgram: {instruction.ProgramName}\n\t\t\t Instruction: {instruction.InstructionName}\n";
+                    return instruction.Values.Aggregate(
+                        s,
+                        (current, entry) =>
+                            current + $"\t\t\t\t{entry.Key} - {Convert.ChangeType(entry.Value, entry.Value.GetType())}\n");
+                });
+            Debug.WriteLine(aggregate);
+            
+            byte[] signature = TradingAccount.Sign(messageData.ToArray());
+           
+            Debug.WriteLine("Message Signature: " + Convert.ToBase64String(signature));
+            
+            return signature;
+        }
     }
     public class ActiveAccount
     {
@@ -214,4 +264,11 @@ namespace Tranquility.Wallets
 
         public bool isImported { get; set; }
     }
+    public class marketInfo
+    {
+        public string Name { get; set; }
+        public string Address { get; set; }
+       
+    }
+
 }

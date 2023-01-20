@@ -9,9 +9,9 @@
   <Identity
     Name="23433BifrostInc.TranquilityWallet"
     Publisher="CN=37E7477A-D5D9-4407-A210-04234CDD53AD"
-    Version="1.0.7.0" />
+    Version="1.0.11.0" />
 
-  <mp:PhoneIdentity PhoneProductId="64c52c56-107a-4b37-ba39-5fd85f9a8e8d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="d94550ac-c8f9-4ef3-98d1-c1aaf6f5cd7f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Tranquility Wallet</DisplayName>

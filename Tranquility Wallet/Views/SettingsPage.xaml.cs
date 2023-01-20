@@ -127,5 +127,11 @@ namespace Tranquility.Views
             Core.Runtime.SelectedNavItem = 5;
             Frame.Navigate(typeof(SettingsPage));
         }
+
+        private void OpenSerum_Click(object sender, RoutedEventArgs e)
+        {
+            Core.Runtime.SelectedNavItem = 6;
+            Frame.Navigate(typeof(Trade));
+        }
     }
 }
