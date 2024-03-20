@@ -20,7 +20,7 @@ using System.Linq;
 
 namespace Tranquility.Views
 {
-    public sealed partial class Overview : Page, INotifyPropertyChanged
+    public sealed partial class Overview : Page
     {
         public const string UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
         public Overview()
@@ -31,20 +31,6 @@ namespace Tranquility.Views
             OverviewNavButton.BorderThickness = new Thickness(1, 1, 1, 1);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void Set<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
-        {
-            if (Equals(storage, value))
-            {
-                return;
-            }
-
-            storage = value;
-            OnPropertyChanged(propertyName);
-        }
-
-        private void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         private async void Overview_Loading(FrameworkElement sender, object args)
         {
             try
@@ -349,6 +335,11 @@ namespace Tranquility.Views
         {
             Core.Runtime.SelectedNavItem = 6;
             Frame.Navigate(typeof(Trade));
+        }
+
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

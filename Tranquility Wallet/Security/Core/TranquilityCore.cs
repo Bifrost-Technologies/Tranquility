@@ -26,7 +26,6 @@ namespace Tranquility.Core
         public static string WalletRPCprovider { get; set; }
         public static KeyValuePair<List<OpenOrder>, List<OpenOrder>> ActiveOrderBook { get; set; }
         public static TokenWallet tokenWallet { get; set; }
-        public static Market ActiveMarket { get; set; }
         public static List<MarketInfo> openbookMarkets { get; set; }
         public static bool SuccessfullyLoaded { get; set; }
         public static bool SuccessfullyLoadedAV { get; set; }
@@ -40,6 +39,52 @@ namespace Tranquility.Core
         public static bool isLinkEnabled { get; set; }
         public static bool isMonitoring { get; set; }
 
+
+        public static async Task StartServer()
+        {
+            try
+            {
+                var streamSocketListener = new Windows.Networking.Sockets.StreamSocketListener();
+
+                // The ConnectionReceived event is raised when connections are received.
+                streamSocketListener.ConnectionReceived += StreamSocketListener_ConnectionReceived;
+
+                // Start listening for incoming TCP connections on the specified port. You can specify any port that's not currently in use.
+                await streamSocketListener.BindServiceNameAsync("50505");
+                Debug.WriteLine("server is listening!");
+           
+            }
+            catch (Exception ex)
+            {
+                Windows.Networking.Sockets.SocketErrorStatus webErrorStatus = Windows.Networking.Sockets.SocketError.GetStatus(ex.GetBaseException().HResult);
+                Debug.WriteLine(webErrorStatus.ToString() != "Unknown" ? webErrorStatus.ToString() : ex.Message);
+            }
+        }
+
+        public static async void StreamSocketListener_ConnectionReceived(Windows.Networking.Sockets.StreamSocketListener sender, Windows.Networking.Sockets.StreamSocketListenerConnectionReceivedEventArgs args)
+        {
+            string request;
+            using (var streamReader = new StreamReader(args.Socket.InputStream.AsStreamForRead()))
+            {
+                request = await streamReader.ReadLineAsync();
+            }
+            Debug.WriteLine("test");
+            // Echo the request back as the response.
+            using (Stream outputStream = args.Socket.OutputStream.AsStreamForWrite())
+            {
+                using (var streamWriter = new StreamWriter(outputStream))
+                {
+                    await streamWriter.WriteLineAsync(request);
+                    await streamWriter.FlushAsync();
+                }
+            }
+
+            
+
+            sender.Dispose();
+
+           
+        }
         public static async Task linkNetworkAI()
         {
             isMonitoring= true;

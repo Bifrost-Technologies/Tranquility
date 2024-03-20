@@ -37,15 +37,17 @@
             BorderBrush="{StaticResource BifrostBorder4}"
             BorderThickness="1,1,1,1"
             CornerRadius="20,20,20,20">
-            <Canvas FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
+            <TextBlock x:Name="medianpriceLabel" TextWrapping="Wrap" Text="0.0" Margin="155,227,619,220" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
 
-                <TextBox
+
+        <TextBox
                     x:Name="priceField"
                     Canvas.Left="537"
                     Canvas.Top="197"
                     Width="317"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     BorderBrush="{StaticResource BifrostBorder4}"
                     BorderThickness="2,2,2,2"
                     CornerRadius="10,10,10,10"
@@ -56,14 +58,14 @@
                     SelectionHighlightColor="#FF00A7FF"
                     SelectionHighlightColorWhenNotFocused="#FF00A7FF"
                     Text=""
-                    TextWrapping="Wrap" />
-                <TextBox
+                    TextWrapping="Wrap" Margin="386,75,0,0" />
+        <TextBox
                     x:Name="sizeField"
                     Canvas.Left="537"
                     Canvas.Top="271"
                     Width="320"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     BorderBrush="{StaticResource BifrostBorder4}"
                     BorderThickness="2,2,2,2"
                     CornerRadius="10,10,10,10"
@@ -74,34 +76,34 @@
                     SelectionHighlightColor="#FF00A7FF"
                     SelectionHighlightColorWhenNotFocused="#FF00A7FF"
                     Text=""
-                    TextWrapping="Wrap" />
-                <TextBlock
+                    TextWrapping="Wrap" Margin="385,-85,0,0" />
+        <TextBlock
                     Canvas.Left="537"
                     Canvas.Top="172"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     FontSize="15"
                     FontWeight="Bold"
                     RenderTransformOrigin="0.567,-1.068"
                     Text="Price:"
-                    TextWrapping="Wrap" />
-                <TextBlock
+                    TextWrapping="Wrap" Margin="125,15,0,0" />
+        <TextBlock
                     Canvas.Left="537"
                     Canvas.Top="246"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     FontSize="15"
                     FontWeight="Bold"
                     RenderTransformOrigin="0.567,-1.068"
                     Text="Size:"
-                    TextWrapping="Wrap" />
-                <Button
+                    TextWrapping="Wrap" Margin="125,-150,0,0" />
+        <Button
                     x:Name="PlaceOrderButton"
                     Canvas.Left="624"
                     Canvas.Top="339"
                     Width="143"
                     Height="40"
-                    VerticalAlignment="Top"
+                    VerticalAlignment="Center"
                     Background="{x:Null}"
                     BorderBrush="{StaticResource BifrostBorder4}"
                     BorderThickness="1,1,1,1"
@@ -109,74 +111,71 @@
                     Content="Place Order"
                     CornerRadius="5,5,5,5"
                     FocusVisualPrimaryBrush="{x:Null}"
-                    FocusVisualSecondaryBrush="{x:Null}" />
-                <Button
+                    FocusVisualSecondaryBrush="{x:Null}" Margin="385,220,0,0" HorizontalAlignment="Center" />
+        <Button
                     x:Name="PlaceOrderButton_Copy1"
                     Canvas.Left="582"
                     Canvas.Top="422"
                     Width="235"
                     Height="40"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
                     Background="{x:Null}"
                     BorderBrush="{StaticResource BifrostBorder4}"
                     BorderThickness="1,1,1,1"
-                    Click="Transfer_Click"
+                    Click="OrderManagementNavigate_Click"
                     Content="Order Management"
                     CornerRadius="5,5,5,5"
                     FocusVisualPrimaryBrush="{x:Null}"
-                    FocusVisualSecondaryBrush="{x:Null}" />
-                <ToggleSwitch
+                    FocusVisualSecondaryBrush="{x:Null}" Margin="385,420,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <ToggleSwitch
                     x:Name="OrderTypeSwitch"
                     Canvas.Left="537"
                     Canvas.Top="98"
                     Width="110"
                     Header="Order Type"
                     OffContent="Buy"
-                    OnContent="Sell" />
-                <ComboBox
+                    OnContent="Sell" Margin="700,-325,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <ComboBox
                     x:Name="OpenBookMarketSelector"
                     Canvas.Left="537"
                     Canvas.Top="42"
-                    Width="320"
-                    VerticalAlignment="Center"
-                    SelectionChanged="ComboBox_SelectionChanged" />
-                <TextBlock
+                    Width="233"
+                    SelectionChanged="ComboBox_SelectionChanged" Margin="315,-300,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock
                     Canvas.Left="537"
                     Canvas.Top="17"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
+                    VerticalAlignment="Center"
                     FontSize="15"
                     FontWeight="Bold"
                     RenderTransformOrigin="0.567,-1.068"
                     Text="Token:"
-                    TextWrapping="Wrap" />
-                <ListView
+                    TextWrapping="Wrap" Margin="135,-365,0,0" />
+        <ListView
                     x:Name="BuyOrders"
                     Canvas.Left="10"
                     Canvas.Top="246"
                     Width="443"
                     MaxHeight="215"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <ListViewItem>
-                        <Canvas Width="421" Height="38">
-                            <ProgressBar
+                    ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="-440,280,0,0" Height="192">
+            <ListViewItem>
+                <Canvas Width="421" Height="38">
+                    <ProgressBar
                                 Canvas.Left="10"
                                 Canvas.Top="7"
                                 Width="330"
                                 Height="24"
                                 HorizontalAlignment="Left"
                                 Foreground="#FF009802" />
-                            <TextBlock
+                    <TextBlock
                                 Canvas.Left="18"
                                 Canvas.Top="13"
                                 FontSize="9"
                                 FontWeight="Bold"
                                 Text="0 Token"
                                 TextWrapping="Wrap" />
-                            <TextBlock
+                    <TextBlock
                                 Width="66"
                                 Height="15"
                                 Margin="350,10,0,0"
@@ -185,34 +184,34 @@
                                 FontSize="8"
                                 Text="0.001"
                                 TextWrapping="Wrap" />
-                        </Canvas>
-                    </ListViewItem>
-                </ListView>
-                <ListView
+                </Canvas>
+            </ListViewItem>
+        </ListView>
+        <ListView
                     x:Name="SellOrders"
                     Canvas.Left="10"
                     Canvas.Top="11"
                     Width="443"
                     MaxHeight="200"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center">
-                    <ListViewItem>
-                        <Canvas Width="421" Height="38">
-                            <ProgressBar
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Margin="-440,-180,0,0" Height="192">
+            <ListViewItem>
+                <Canvas Width="421" Height="38">
+                    <ProgressBar
                                 Canvas.Left="10"
                                 Canvas.Top="7"
                                 Width="330"
                                 Height="24"
                                 HorizontalAlignment="Left"
                                 Foreground="#FFA70101" />
-                            <TextBlock
+                    <TextBlock
                                 Canvas.Left="18"
                                 Canvas.Top="13"
                                 FontSize="9"
                                 FontWeight="Bold"
                                 Text="0 Token"
                                 TextWrapping="Wrap" />
-                            <TextBlock
+                    <TextBlock
                                 Width="66"
                                 Height="15"
                                 Margin="350,10,0,0"
@@ -221,18 +220,9 @@
                                 FontSize="8"
                                 Text="0.001"
                                 TextWrapping="Wrap" />
-                        </Canvas>
-                    </ListViewItem>
-                </ListView>
-                <TextBlock
-                    x:Name="medianpriceLabel"
-                    Canvas.Left="176"
-                    Canvas.Top="216"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontSize="15"
-                    Text="0.0"
-                    TextWrapping="Wrap" />
+                </Canvas>
+            </ListViewItem>
+        </ListView>
 
 
 
@@ -247,9 +237,9 @@
 
 
 
-            </Canvas>
 
-        </Border>
+
+
         <Canvas
             Height="45"
             VerticalAlignment="Top"

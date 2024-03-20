@@ -12,21 +12,23 @@
     </Page.Background>
 
     <Grid RequestedTheme="Dark">
-        <Border x:Name="pageborder" BorderBrush="{StaticResource BifrostBorder4}" BorderThickness="1" Margin="24,60,28,16" FocusVisualPrimaryBrush="{x:Null}" CornerRadius="20,20,20,20">
-            <Canvas FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
-                <ComboBox x:Name="InventorySelector" Width="279" PlaceholderText="Select metadata token to send" SelectionChanged="TokenWalletSelector_SelectionChanged" ToolTipService.ToolTip="If you have token accounts they will displayed here" Canvas.Left="147" Canvas.Top="277" Visibility="Visible" HorizontalAlignment="Center" CornerRadius="10,10,10,10" BorderBrush="{StaticResource BifrostBorder4}" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" PlaceholderForeground="#FF9C9C9C"/>
-                <TextBox x:Name="SolanaAddressSendField" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="612" Height="32" PlaceholderText="Solana address to send assets to" ToolTipService.ToolTip="This is the address you wish to send SOL or tokens to" Canvas.Left="147" Canvas.Top="140" SelectionHighlightColor="#FF00D6FF" CornerRadius="10,10,10,10" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" BorderBrush="{StaticResource BifrostBorder4}"/>
-                <TextBox x:Name="SendAmountField" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279" Height="33" InputScope="Number" PlaceholderText="Amount to send" ToolTipService.ToolTip="This is the amount to send in the transfer" Canvas.Left="147" Canvas.Top="203" SelectionHighlightColor="#FF00D6FF" CornerRadius="10,10,10,10" BorderBrush="{StaticResource BifrostBorder4}"/>
-                <Button x:Name="TransferButton" Content="Transfer" VerticalAlignment="Top" Width="143" Height="40" Click="Transfer_Click" BorderBrush="{StaticResource BifrostBorder4}" BorderThickness="1,1,1,1" Canvas.Left="753" Canvas.Top="412" CornerRadius="10,10,10,10" Background="{x:Null}" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}"/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="21" FontWeight="Bold" Canvas.Left="328" Canvas.Top="49"><Run Text="Transfer Inventory Assets"/><LineBreak/><Run/></TextBlock>
-                <Image x:Name="CollectiblePreview" HorizontalAlignment="Left" Height="215" VerticalAlignment="Top" Width="215" Canvas.Left="474" Canvas.Top="237"/>
+        <Border x:Name="pageborder" BorderBrush="{StaticResource BifrostBorder4}" BorderThickness="1" Margin="24,60,28,16" FocusVisualPrimaryBrush="{x:Null}" CornerRadius="20,20,20,20"/>
+
+        <ComboBox x:Name="InventorySelector" Width="279" PlaceholderText="Select metadata token to send" SelectionChanged="TokenWalletSelector_SelectionChanged" ToolTipService.ToolTip="If you have token accounts they will displayed here" Canvas.Left="147" Canvas.Top="277" Visibility="Visible" CornerRadius="10,10,10,10" BorderBrush="{StaticResource BifrostBorder4}" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" PlaceholderForeground="#FF9C9C9C" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-332,100,0,0"/>
+        <TextBox x:Name="SolanaAddressSendField" TextWrapping="Wrap" Text="" Margin="0,-100,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" Width="612" Height="32" PlaceholderText="Solana address to send assets to" ToolTipService.ToolTip="This is the address you wish to send SOL or tokens to" Canvas.Left="147" Canvas.Top="140" SelectionHighlightColor="#FF00D6FF" CornerRadius="10,10,10,10" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" BorderBrush="{StaticResource BifrostBorder4}"/>
+        <TextBox x:Name="SendAmountField" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="279" Height="33" InputScope="Number" PlaceholderText="Amount to send" ToolTipService.ToolTip="This is the amount to send in the transfer" Canvas.Left="147" Canvas.Top="203" SelectionHighlightColor="#FF00D6FF" CornerRadius="10,10,10,10" BorderBrush="{StaticResource BifrostBorder4}" Margin="-332,0,0,0"/>
+        <Button x:Name="TransferButton" Content="Transfer" VerticalAlignment="Center" Width="143" Height="40" Click="Transfer_Click" BorderBrush="{StaticResource BifrostBorder4}" BorderThickness="1,1,1,1" Canvas.Left="753" Canvas.Top="412" CornerRadius="10,10,10,10" Background="{x:Null}" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" Margin="650,300,0,0" HorizontalAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="21" FontWeight="Bold" Canvas.Left="328" Canvas.Top="49" Margin="4,-250,0,0"><Run Text="Transfer Inventory Assets"/><LineBreak/><Run/></TextBlock>
+        <Image x:Name="CollectiblePreview" HorizontalAlignment="Center" Height="215" VerticalAlignment="Center" Width="215" Canvas.Left="474" Canvas.Top="237" Margin="250,180,0,0"/>
 
 
 
 
-            </Canvas>
 
-        </Border>
+
+
         <Canvas Height="45" VerticalAlignment="Top" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
             <Button x:Name="OverviewNavButton" Height="37" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Background="#33565656" Click="OverviewNavButton_Click" Canvas.Top="4" Canvas.Left="10" CornerRadius="5,5,5,5">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE825;"/>

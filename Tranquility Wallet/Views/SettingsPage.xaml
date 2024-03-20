@@ -41,7 +41,7 @@
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE736;"/>
             </Button>
         </Canvas>
-            <Canvas Height="491" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}">
+            <Canvas Height="491" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" HorizontalAlignment="Center" Width="954">
                 <Button x:Name="save_rpc" Content="Save" Canvas.Left="831" Canvas.Top="193" BorderThickness="1,1,1,1" Click="save_rpc_Click" Width="98" VerticalAlignment="Center" CornerRadius="5,5,5,5" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{StaticResource BifrostBorder4}"/>
                 <TextBox x:Name="rpcfield" Canvas.Left="51" TextWrapping="Wrap" Text="" Canvas.Top="188" Width="757" BorderThickness="2,2,2,2" SelectionHighlightColor="#FF00A7FF" PlaceholderText="Custom RPC endpoint goes here" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="38" MaxWidth="800" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="55" CornerRadius="10,10,10,10" RequestedTheme="Default" FocusVisualPrimaryBrush="#FF333333" BorderBrush="{StaticResource BifrostBorder4}"/>
                 <TextBlock Canvas.Left="70" TextWrapping="Wrap" Text="Rpc Provider" Canvas.Top="150" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.567,-1.068"/>

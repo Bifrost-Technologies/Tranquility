@@ -51,7 +51,7 @@ namespace Tranquility.Views
             {
                 await Wallets.SolanaWallet.RetrieveActiveAccountData();
                 Market market = await Trading.OpenBookAPI.GetMarket("8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
-
+                Core.Runtime.ActiveMarket = market;
                 Core.Runtime.ActiveOrderBook = await Trading.OpenBookAPI.GetOrderBookData("8BnEgHoWFysVcuFFX7QztDmzuH8r5ZFvyP3sYwn1XTh6");
 
                 await LoadOpenBookMarketSelector();
@@ -349,11 +349,21 @@ namespace Tranquility.Views
         {
             var marketAddress = ((MarketInfo)((ComboBoxItem)OpenBookMarketSelector.SelectedItem).Tag).Address;
             Market market = await Trading.OpenBookAPI.GetMarket(marketAddress.Key);
+            Core.Runtime.ActiveMarket= market;
 
             Core.Runtime.ActiveOrderBook = await Trading.OpenBookAPI.GetOrderBookData(marketAddress.Key);
             await LoadOrderBook(market);
         }
-      
+
+        private void PlaceOrderButton_Copy1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OrderManagementNavigate_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(OrderManagement));
+        }
     }
 
 }

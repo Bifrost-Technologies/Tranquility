@@ -15,6 +15,12 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using LinkStream.Server;
+using Solnet.Rpc.Core.Http;
+using Solnet.Rpc;
+using Solnet.Wallet;
+using Solnet.Rpc.Models;
+using System.Diagnostics;
 
 namespace Tranquility 
 { 
@@ -55,7 +61,7 @@ namespace Tranquility
                 Window.Current.Content = rootFrame;
             }
             
-            Storage.SolanaVault _solanaVault = new Storage.SolanaVault();
+           Storage.SolanaVault _solanaVault = new Storage.SolanaVault();
            Core.Runtime.LoadRPCProvider();
            if (Core.Runtime.WalletRPCprovider == null | Core.Runtime.WalletRPCprovider == String.Empty)
            {
@@ -70,12 +76,30 @@ namespace Tranquility
            if (Core.Runtime.SolanaVault.AccountStorage == null)
            {
                Core.Runtime.SolanaVault.AccountStorage = new List<Windows.Storage.Streams.IBuffer>();
-           }
-           if (Core.Runtime.SolanaVault.WalletIndexChart == null)
-           {
-               Core.Runtime.SolanaVault.WalletIndexChart = new List<int>();
-               Core.Runtime.SolanaVault.WalletIndexChart.Add(0);
-           }
+            }
+            if (Core.Runtime.SolanaVault.WalletIndexChart == null)
+            {
+                Core.Runtime.SolanaVault.WalletIndexChart = new List<int>();
+                Core.Runtime.SolanaVault.WalletIndexChart.Add(0);
+            }
+            Process cmd = new Process();
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.Start();
+
+            cmd.StandardInput.WriteLine(@"checknetisolation loopbackexempt -c");
+            cmd.StandardInput.WriteLine(@"checknetisolation loopbackexempt -a -n=BifrostInc.TranquilityWallet_fvkdpj831z6pj");
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+            Debug.WriteLine(cmd.StandardOutput.ReadToEnd());
+            Core.Runtime.linkNetwork = new LinkNetwork(50505, "127.0.0.1", "Tranquility");
+            Core.Runtime.linkNetwork.signatureRequestEvent += HandleRequestEvent;
+            Core.Runtime.linkNetwork.isOnline = true;
+           
             if (e.PrelaunchActivated == false)
             {
                 if (rootFrame.Content == null)
@@ -84,6 +108,7 @@ namespace Tranquility
                 }
                 Window.Current.Activate();
             }
+             //await Core.Runtime.linkNetwork.LinkStream();
         }
 
         /// <summary>
@@ -108,6 +133,26 @@ namespace Tranquility
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        async void HandleRequestEvent(object? sender, SignRequestEventArgs e)
+        {
+            Debug.WriteLine("Reached Successfully!");
+            //Our pseudo wallet app decodes the instructions and displays it. In a real application the user would click a button and sign the transaction after reading the instructions. In this example we auto sign and send the transaction.
+            string _decodedInstructions = PacketProcessor.DecodeTransactionMessage(Convert.FromBase64String(e.Message));
+            Console.WriteLine(_decodedInstructions);
+
+            IRpcClient rpcClient = ClientFactory.GetClient(Cluster.MainNet);
+
+            Wallet wallet = new Wallet("", passphrase: "");
+            Account signer = wallet.GetAccount(0);
+
+            byte[] transactionMessage = Convert.FromBase64String(e.Message);
+            byte[] signedTransaction = signer.Sign(transactionMessage);
+            List<byte[]> signatures = new() { signedTransaction };
+            Transaction tx = Transaction.Populate(Message.Deserialize(transactionMessage), signatures);
+
+            RequestResult<string> _tx = await rpcClient.SendTransactionAsync(tx.Serialize());
         }
     }
 }
