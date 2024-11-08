@@ -1,4 +1,6 @@
-# Tranquility ![TranquilityMithril-logo](https://user-images.githubusercontent.com/24855008/198894386-c2d6100b-7ce4-4030-a330-1bcd144af8a5.png)
+# Tranquility 
+<p align="center"> <img src="https://github.com/user-attachments/assets/9b879961-f3b0-402e-9fc8-6c0b549a9b1c" width="300" height="300"> </p>
+
 Maximum Security Wallet for the Solana blockchain.
 
 Available on the Microsoft Store for PC, Mobile/Tablet, Xbox, Holo-lens etc.
